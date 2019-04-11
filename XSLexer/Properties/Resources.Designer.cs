@@ -69,24 +69,39 @@ namespace XSLexer.Properties {
         ///# - float
         ///# - string
         ///
-        ///dataTypes&gt;
+        ///# == Allowed DataTypes
+        ///XsDataTypes&gt;
         ///	int: int
         ///	float: float
         ///	string: string
         ///	boolean: boolean
         ///
-        ///explicitDataTypes&gt;
-        ///	unit: int
-        ///	protoUnit: int
-        ///
-        ///implicitDataTypes&gt; 
-        ///	Unit: unit
-        ///	ProtoUnit: protoUnit
-        ///	protounit: protoUnit.
+        ///# == Allowed Function DataTypes
+        ///XsFunctionReturnTypes&gt;
+        ///	int: int
+        ///	float: float
+        ///	string: string
+        ///	boolean: boolean
+        ///	void: void.
         /// </summary>
         internal static string DataTypes {
             get {
                 return ResourceManager.GetString("DataTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # Tokenization chart using regular expression
+        ///# 
+        ///# Root		: [bool]	# Can this token be made without any prior context?
+        ///# CharStart : [Regex]	# The regex that needs to be valid on the first character
+        ///# CharBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
+        ///# WordsDef	: [Ref]		# Name to a list of words defined anywhere else in the file.		&gt;&gt; CharStart and CharBody are required.
+        ///# Word		: [Regex]   # The regex with the specific word it needs to be to be that tok [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TokenDefinitions {
+            get {
+                return ResourceManager.GetString("TokenDefinitions", resourceCulture);
             }
         }
     }

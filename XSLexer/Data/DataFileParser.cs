@@ -2,11 +2,11 @@
 
 namespace XSLexer.Data
 {
-    static class DataFileParser
+    static class DataSetParser
     {
         private static readonly char[] WHITESPACE_CHARS = { ' ', '\t', (char)13};
 
-        public static DataContainer[] Parse(string dataString)
+        public static DataSet Parse(string dataString, string dataSetName)
         {
             string listName = "";
             List<DataValue> dataValues = new List<DataValue>();
@@ -43,7 +43,7 @@ namespace XSLexer.Data
                 dataContainers.Add(new DataContainer(listName, dataValues.ToArray()));
             }
 
-            return dataContainers.ToArray();
+            return new DataSet(dataSetName, dataContainers.ToArray());
         }
 
         private static bool IsEmpty(string s)

@@ -66,5 +66,8 @@
   <ItemGroup>
     <None Include="Resources\DataTypes.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TokenDefinitions.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
