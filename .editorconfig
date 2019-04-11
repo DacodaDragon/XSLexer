@@ -1,0 +1,8 @@
+#Just some general consistency things, nothing too intrusive.
+[*.cs] 
+trim_trailing_whitespace = true
+insert_final_newline = true
+indent_style = space
+end_of_line = lf
+indent_size = 4
+tab_width = 4
