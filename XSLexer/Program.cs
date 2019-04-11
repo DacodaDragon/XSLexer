@@ -1,4 +1,5 @@
 ﻿using System;
+using XSLexer.Properties;
 
 namespace XSLexer
 {
@@ -7,8 +8,7 @@ namespace XSLexer
         // Main entry point
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World! Welcome to the Leftovers XS Lexer!");
-            Console.ReadKey();
+
         }
     }
 }

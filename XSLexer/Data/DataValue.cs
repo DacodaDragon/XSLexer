@@ -8,8 +8,9 @@
         private readonly string m_ID;
         private readonly string m_Value;
 
-        public string id => m_ID;
+        public string key => m_ID;
         public string value => m_Value;
+        public bool isEmpty => string.IsNullOrWhiteSpace(m_ID) || string.IsNullOrWhiteSpace(m_Value);
 
         public DataValue(string id, string value)
         {
