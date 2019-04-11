@@ -1,0 +1,2 @@
+# Tell git to convert CRLF or CR to LF
+*.cs text eol=lf
