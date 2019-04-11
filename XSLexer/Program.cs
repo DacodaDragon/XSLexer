@@ -13,11 +13,13 @@ namespace XSLexer
                 new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) },
                 new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
 
-            DataSet root = new DataSet("Root Tokens", data.Tokens.Filter(x => true));
+            DataSet tokens = new DataSet("Token Definitions", data.Tokens.All);
+            DataSet words = new DataSet("Word Definitions", data.WordDefinitions.All);
 
-            Debug.Log(root);
+            Debug.Log(tokens);
+            Debug.Log(words);
+
             Debug.Pause();
-            
         }
     }
 }

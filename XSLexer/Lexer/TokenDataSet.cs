@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using XSLexer.Data;
 
 namespace XSLexer.Lexer

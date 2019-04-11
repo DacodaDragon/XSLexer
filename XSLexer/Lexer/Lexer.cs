@@ -4,17 +4,13 @@ namespace XSLexer.Lexer
 {
     class LexData
     {
-        private TokenDataSet m_TokenConfiguration;
-        private DataSet[] m_WordDefinitions;
-
-        public TokenDataSet Tokens => m_TokenConfiguration;
-        public DataSet[] WordDefinitions => m_WordDefinitions;
-
+        public TokenDataSet Tokens { get; }
+        public WordListDataSet WordDefinitions { get; }
 
         public LexData(DataSet[] tokenDataSets, DataSet[] WordDefinitions)
         {
-            m_TokenConfiguration = new TokenDataSet(tokenDataSets);
-            m_WordDefinitions = WordDefinitions;
+            Tokens = new TokenDataSet(tokenDataSets);
+            this.WordDefinitions = new WordListDataSet(WordDefinitions);
         }
     }
 }
