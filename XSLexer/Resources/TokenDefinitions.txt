@@ -8,7 +8,7 @@
 # FollowedBy: [Token]   # Requires to be followed up by a different token
 
 DataType>
-	Root: true
+	Root: True
 	CharStart: [a-zA-Z]
 	CharBody: [a-zA-Z]
 	WordsDef: XsFunctionReturnTypes

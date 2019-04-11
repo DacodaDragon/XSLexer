@@ -24,5 +24,10 @@ namespace XSLexer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("War: " + message);
         }
+
+        public static void Pause()
+        {
+            Console.ReadKey(true);
+        }
     }
 }

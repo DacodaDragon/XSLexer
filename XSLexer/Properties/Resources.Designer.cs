@@ -91,17 +91,28 @@ namespace XSLexer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # Tokenization chart using regular expression
+        ///   Looks up a localized string similar to # XS Tokenization chart using regular expression
         ///# 
         ///# Root		: [bool]	# Can this token be made without any prior context?
         ///# CharStart : [Regex]	# The regex that needs to be valid on the first character
         ///# CharBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
         ///# WordsDef	: [Ref]		# Name to a list of words defined anywhere else in the file.		&gt;&gt; CharStart and CharBody are required.
-        ///# Word		: [Regex]   # The regex with the specific word it needs to be to be that tok [rest of string was truncated]&quot;;.
+        ///# Word		: [Regex]   # The regex with the specific word it needs to be to be that  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TokenDefinitions {
             get {
                 return ResourceManager.GetString("TokenDefinitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to void Main() {
+        ///
+        ///}.
+        /// </summary>
+        internal static string XsFunction {
+            get {
+                return ResourceManager.GetString("XsFunction", resourceCulture);
             }
         }
     }
