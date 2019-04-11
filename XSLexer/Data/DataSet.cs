@@ -45,5 +45,16 @@ namespace XSLexer.Data
         {
             get { return GetSet(i); }
         }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("DataSet: ").AppendLine(Name);
+            for (int i = 0; i < Length; i++)
+            {
+                stringBuilder.Append(this[i].ToString());
+            }
+            return stringBuilder.ToString();
+        }
     }
 }

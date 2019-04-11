@@ -4,23 +4,25 @@ namespace XSLexer
 {
     static class Debug
     {
-        static void Log(string message)
+        public static void Log(object message) => Log(message.ToString());
+        public static void Log(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Log: " + message);
         }
 
-        static void Error(string message)
+        public static void Error(object message) => Error(message.ToString());
+        public static void Error(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Err: " + message);
         }
 
-        static void Warn(string message)
+        public static void Warn(object message) => Warn(message.ToString());
+        public static void Warn(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("War: " + message);
         }
-
     }
 }

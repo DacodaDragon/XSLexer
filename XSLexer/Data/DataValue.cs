@@ -17,5 +17,10 @@
             m_ID = id;
             m_Value = value;
         }
+
+        public override string ToString()
+        {
+            return $"\t{m_ID}:{m_Value}";
+        }
     }
 }

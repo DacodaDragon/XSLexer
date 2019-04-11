@@ -6,7 +6,7 @@ namespace XSLexer.Data
     {
         private static readonly char[] WHITESPACE_CHARS = { ' ', '\t', (char)13};
 
-        public static DataSet Parse(string dataString, string dataSetName)
+        public static DataSet Parse(string dataSetName, string dataString)
         {
             string listName = "";
             List<DataValue> dataValues = new List<DataValue>();

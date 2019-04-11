@@ -1,4 +1,6 @@
-﻿namespace XSLexer.Data
+﻿using System.Text;
+
+namespace XSLexer.Data
 {
     class DataContainer
     {
@@ -48,5 +50,15 @@
             get { return Resolve(key); }
         }
 
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("DataContainer: ").AppendLine(Name);
+            for (int i = 0; i < Length; i++)
+            {
+                stringBuilder.AppendLine(this[i].ToString());
+            }
+            return stringBuilder.ToString();
+        }
     }
 }
