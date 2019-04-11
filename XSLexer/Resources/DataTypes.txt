@@ -1,0 +1,22 @@
+# XS dataType Configuration
+#
+# Base XS DataTypes:
+# - boolean
+# - int
+# - float
+# - string
+
+# == Allowed DataTypes
+XsDataTypes>
+	int: int
+	float: float
+	string: string
+	boolean: boolean
+
+# == Allowed Function DataTypes
+XsFunctionReturnTypes>
+	int: int
+	float: float
+	string: string
+	boolean: boolean
+	void: void
