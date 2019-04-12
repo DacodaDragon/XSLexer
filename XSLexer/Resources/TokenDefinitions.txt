@@ -79,3 +79,7 @@ Stri>
 	CharStart: [\"]
 	Word: "
 	UntilWith: Stri
+
+Coln>
+	CharStart: [:]
+	Word: :

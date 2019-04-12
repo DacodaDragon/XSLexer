@@ -68,14 +68,13 @@ namespace XSLexer.Data
 
         private static bool IsListEntry(string s)
         {
-            string[] values = s.Trim(WHITESPACE_CHARS).Split(':');
+            string[] values = s.Trim(WHITESPACE_CHARS).Split(new char[]{':'}, 2);
             return values.Length == 2;
         }
 
-
         private static DataValue ConvertToDataValue(string s)
         {
-            string[] values = s.Trim(WHITESPACE_CHARS).Split(':');
+            string[] values = s.Trim(WHITESPACE_CHARS).Split(new char[] { ':' }, 2);
             return new DataValue(values[0].Trim(WHITESPACE_CHARS), values[1].Trim(WHITESPACE_CHARS));
         }
 
