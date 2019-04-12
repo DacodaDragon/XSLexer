@@ -2,6 +2,7 @@
 using XSLexer.Data;
 using System.Text;
 using System;
+using System.Text.RegularExpressions;
 
 namespace XSLexer.Lexer
 {
@@ -17,7 +18,11 @@ namespace XSLexer.Lexer
         private string m_Code = "";
         private int m_Index = 0;
 
+        private string m_SearchFlag = "";
+        private bool m_SearchInclusive = false;
+
         private LexConfig m_Config;
+
         public Tokenizer(LexConfig data)
         {
             m_Config = data;
@@ -33,9 +38,16 @@ namespace XSLexer.Lexer
 
         public Token[] Tokenize(string code)
         {
-            m_Code = code;
+            m_Code = code + '\n';
+
             while (CreateNextToken(out Token token))
+            {
                 m_Tokens.Add(token);
+
+                if (!string.IsNullOrEmpty(m_SearchFlag))
+                    m_Tokens.Add(ParseUntil(m_SearchFlag, token));
+
+            }
 
             Token[] TokenArray = m_Tokens.ToArray();
 
@@ -46,7 +58,7 @@ namespace XSLexer.Lexer
         public bool CreateNextToken(out Token token)
         {
             token = null;
-            for (;m_Index < m_Code.Length; m_Index++)
+            for (; m_Index < m_Code.Length; m_Index++)
             {
                 m_Buffer.Append(m_Code[m_Index]);
 
@@ -74,9 +86,32 @@ namespace XSLexer.Lexer
             return false;
         }
 
-        public void SkipUnknownChar()
+        private void SkipUnknownChar()
         {
             m_Buffer.Remove(m_Buffer.Length - 1, 1);
+        }
+
+        private Token ParseUntil(string searchType, Token lastToken)
+        {
+            string lastType = lastToken.Type;
+            string lastValue = lastToken.Value;
+            m_Tokens.RemoveAt(m_Tokens.Count - 1);
+
+            int startIndex = m_Index - lastValue.Length;
+
+            while (CreateNextToken(out Token t))
+            {
+                if (t.Type == searchType)
+                {
+                    if (!m_SearchInclusive)
+                        m_Index -= t.Value.Length;
+
+                    int length = m_Index - startIndex;
+                    m_SearchFlag = "";
+                    return new Token(lastType, m_Code.Substring(startIndex, length));
+                }
+            }
+            throw new Exception("Tried parsing until I couldn't");
         }
 
         private bool Overlaps()
@@ -100,6 +135,7 @@ namespace XSLexer.Lexer
             m_Buffer.Clear();
         }
 
+
         private Token CreateToken()
         {
             m_Buffer.Remove(m_Buffer.Length - 1, 1);
@@ -112,6 +148,24 @@ namespace XSLexer.Lexer
                 throw new Exception("Tried saving token with no previous containers!");
 
             Token token = new Token(Final[0].Name, m_Buffer.ToString());
+
+            if (string.IsNullOrEmpty(m_SearchFlag))
+            {
+                if (Final[0].HasKey(TokenConsts.KEYWORD_UNTIL))
+                {
+                    m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTIL).value;
+                    m_SearchInclusive = false;
+                }
+            }
+
+            if (string.IsNullOrEmpty(m_SearchFlag))
+            {
+                if (Final[0].HasKey(TokenConsts.KEYWORD_UNTILWITH))
+                {
+                    m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTILWITH).value;
+                    m_SearchInclusive = true;
+                }
+            }
 
             // Clear buffering
             ClearBuffers();

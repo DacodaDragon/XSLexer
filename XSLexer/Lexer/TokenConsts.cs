@@ -10,6 +10,8 @@
         public const string KEYWORD_CHARBODY = "CharBody";
         public const string KEYWORD_WORD = "Word";
         public const string KEYWORD_LENGTH = "Length";
+        public const string KEYWORD_UNTIL = "Until";
+        public const string KEYWORD_UNTILWITH = "UntilWith";
 
         public const char WORD_DIVIDER = '|';
     }

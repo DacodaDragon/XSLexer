@@ -1,14 +1,13 @@
 # First phase tokenization chart using regular expression
 # 
 # == Misc ==
-# Ignore	: [bool]	# Don't include this unless specifically referenced
-# Until		: [String]  # Include eveythinng Until another token is found
+# Until		: [String]  # Include everything Until another token is found
 # UntilWith	: [String]  # Include everything Until another token is found, Including the found token
 #
 # == Validation ==
 # CharStart : [Regex]	# The regex that needs to be valid on the first character
 # CharBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
-# Word		: [Regex]   # The regex with the specific word it needs to be to be that token. >> CharStart and CharBody are required.
+# Word		: [String]   # The regex with the specific word it needs to be to be that token. >> CharStart and CharBody are required.
 # Length	: [int]		# Length in characters this token HAS to be (equal)
 
 # CharStart isn't a word, since numeric isn't allowed. 
@@ -64,10 +63,19 @@ MCmt>
 	UntilWith: MCme
 
 MCme>
-	CharStart: [/]
-	CharBody: [*]
+	CharStart: [*]
+	CharBody: [/]
 	Length: 2
 
 NewL>
-	CharStart: [\n\r\f]
+	CharStart: [\n]
 	Length: 1
+
+Spac>
+	CharStart: [ ]
+	CharBody: [ ]
+
+Stri>
+	CharStart: [\"]
+	Word: "
+	UntilWith: Stri
