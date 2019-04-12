@@ -12,6 +12,7 @@ XsDataTypes>
 	float: float
 	string: string
 	boolean: boolean
+	vector: vector
 
 # == Allowed Function DataTypes
 XsFunctionReturnTypes>

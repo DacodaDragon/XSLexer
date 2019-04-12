@@ -64,7 +64,10 @@
     <Compile Include="Data\DataValue.cs" />
     <Compile Include="Data\DataValueList.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Lexer\LexConfig.cs" />
     <Compile Include="Lexer\Lexer.cs" />
+    <Compile Include="Lexer\Token.cs" />
+    <Compile Include="Lexer\TokenFilterPredicates.cs" />
     <Compile Include="Lexer\WordDataSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

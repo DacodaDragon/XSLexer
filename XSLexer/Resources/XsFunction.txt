@@ -1,3 +1,4 @@
-void Main() {
-
+float asin(float x=0.0)
+{
+    return (x + ((x*x*x)/6.0) + ((3*x*x*x*x*x)/40.0) + ((5*x*x*x*x*x*x*x)/112.0));
 }

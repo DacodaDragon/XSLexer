@@ -5,11 +5,11 @@ namespace XSLexer.Data
     class DataContainer
     {
         private readonly string m_Name;
-        private readonly DataValue[] m_DataValues;
+        protected readonly DataValue[] m_DataValues;
 
         public string Name => m_Name;
         public int Length => m_DataValues.Length;
-        public bool IsEmpty => m_DataValues == null || m_DataValues.Length == 0 || m_Name == "";
+        public bool IsEmpty => m_DataValues == null || m_DataValues.Length == 0 || string.IsNullOrEmpty(m_Name);
 
         public DataValue GetValue(int index)
         {
@@ -19,6 +19,11 @@ namespace XSLexer.Data
         public DataValue GetValue(string key)
         {
             return Resolve(key);
+        }
+
+        public bool HasKey(string key)
+        {
+            return !Resolve(key).isEmpty;
         }
 
         private DataValue Resolve(string key)

@@ -1,5 +1,4 @@
-﻿using System;
-using XSLexer.Properties;
+﻿using XSLexer.Properties;
 using XSLexer.Lexer;
 using XSLexer.Data;
 
@@ -9,15 +8,17 @@ namespace XSLexer
     {
         static void Main(string[] args)
         {
-            LexData data = new LexData(
+            LexConfig config = new LexConfig(
                 new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) },
                 new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
 
-            DataSet tokens = new DataSet("Token Definitions", data.Tokens.All);
-            DataSet words = new DataSet("Word Definitions", data.WordDefinitions.All);
+            Token[] tokens = new Tokenizer(config).Tokenize(Resources.XsFunction);
 
-            Debug.Log(tokens);
-            Debug.Log(words);
+            Debug.Log("Tokens found: " + tokens.Length);
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                Debug.Log($"Tok[{i}]: \t" + tokens[i].Type + "\t== " + tokens[i].Value);
+            }
 
             Debug.Pause();
         }
