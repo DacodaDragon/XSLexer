@@ -3,97 +3,131 @@ using XSLexer.Data;
 using System.Text;
 using System;
 
-
 namespace XSLexer.Lexer
 {
+    // This should probably be state machined somehow if we want more
     class Tokenizer
     {
+        private DataContainer[] m_Previous = new DataContainer[0];
+        private DataContainer[] m_Current = new DataContainer[0];
+
+        private List<Token> m_Tokens = new List<Token>();
+        private StringBuilder m_Buffer = new StringBuilder(32);
+
+        private string m_Code = "";
+        private int m_Index = 0;
+
         private LexConfig m_Config;
         public Tokenizer(LexConfig data)
         {
             m_Config = data;
         }
 
-        // TODO: Statemachine this
-        public Token[] Tokenize(string code)
+        public void Reset()
         {
-            DataContainer[] previousContainers = new DataContainer[0];
-            List<Token> tokens = new List<Token>();
-            StringBuilder buffer = new StringBuilder(32);
-
-            for (int i = 0; i < code.Length; i++)
-            {
-                buffer.Append(code[i]);
-
-                DataContainer[] containers = FindPossibleFutureTokens(buffer.ToString());
-
-                if (containers.Length == 0 && previousContainers.Length == 0)
-                {
-                    buffer.Remove(buffer.Length - 1, 1);
-                }
-                else if (containers.Length == 0 && previousContainers.Length > 0)
-                {
-                    tokens.Add(CreateToken(buffer));
-                    containers = new DataContainer[0];
-                    buffer.Clear();
-                    i--;
-                }
-                else if (containers.Length > 0 && previousContainers.Length > 0)
-                {
-                    DataSet current = new DataSet("CurrentSet", containers);
-                    DataSet previous = new DataSet("PreviousSet", previousContainers);
-
-                    int overlap = 0;
-
-                    for (int j = 0; j < current.Length; j++)
-                    {
-                        if (!previous.GetSet(current.GetSet(j).Name).IsEmpty)
-                            overlap++;
-                    }
-
-                    if (overlap == 0)
-                    {
-                        tokens.Add(CreateToken(buffer));
-                        containers = new DataContainer[0];
-                        buffer.Clear();
-                        i--;
-                    }
-                }
-
-                previousContainers = containers;
-            }
-
-            return tokens.ToArray();
+            ClearBuffers();
+            m_Tokens.Clear();
+            m_Code = "";
+            m_Index = 0;
         }
 
-        private Token CreateToken(StringBuilder buffer)
+        public Token[] Tokenize(string code)
         {
-            buffer.Remove(buffer.Length - 1, 1);
-            DataContainer[] Final = FindPossibleFinalTokens(buffer.ToString());
+            m_Code = code;
+            while (CreateNextToken(out Token token))
+                m_Tokens.Add(token);
+
+            Token[] TokenArray = m_Tokens.ToArray();
+
+            Reset();
+            return TokenArray;
+        }
+
+        public bool CreateNextToken(out Token token)
+        {
+            token = null;
+            for (;m_Index < m_Code.Length; m_Index++)
+            {
+                m_Buffer.Append(m_Code[m_Index]);
+
+                m_Current = GetAvailableTokens(m_Buffer.ToString(), false);
+                if (m_Current.Length == 0 && m_Previous.Length == 0)
+                {
+                    SkipUnknownChar();
+                }
+                else if (m_Current.Length == 0 && m_Previous.Length > 0)
+                {
+                    token = CreateToken();
+                    return true;
+                }
+                else if (m_Current.Length > 0 && m_Previous.Length > 0)
+                {
+                    if (!Overlaps())
+                    {
+                        token = CreateToken();
+                        return true;
+                    }
+                }
+
+                m_Previous = m_Current;
+            }
+            return false;
+        }
+
+        public void SkipUnknownChar()
+        {
+            m_Buffer.Remove(m_Buffer.Length - 1, 1);
+        }
+
+        private bool Overlaps()
+        {
+            DataSet current = new DataSet("CurrentSet", m_Current);
+            DataSet previous = new DataSet("PreviousSet", m_Previous);
+
+            for (int j = 0; j < current.Length; j++)
+            {
+                if (!previous.GetSet(current.GetSet(j).Name).IsEmpty)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void ClearBuffers()
+        {
+            m_Previous = new DataContainer[0];
+            m_Current = new DataContainer[0];
+            m_Buffer.Clear();
+        }
+
+        private Token CreateToken()
+        {
+            m_Buffer.Remove(m_Buffer.Length - 1, 1);
+            DataContainer[] Final = GetAvailableTokens(m_Buffer.ToString(), true);
 
             if (Final.Length > 1)
-            {
                 throw new Exception("Found ambigious first phase tokens! ");
-            }
 
             if (Final.Length == 0)
                 throw new Exception("Tried saving token with no previous containers!");
 
-            return new Token(Final[0].Name, buffer.ToString());
+            Token token = new Token(Final[0].Name, m_Buffer.ToString());
+
+            // Clear buffering
+            ClearBuffers();
+
+            return token;
         }
 
-        private DataContainer[] FindPossibleFutureTokens(string checkString)
+        private DataContainer[] GetAvailableTokens(string checkString, bool final)
         {
             if (string.IsNullOrEmpty(checkString))
                 return new DataContainer[0];
-            return m_Config.Tokens.Filter((x)=> TokenValidationPredicates.PotentialTokenfilter(x, checkString));
-        }
 
-        private DataContainer[] FindPossibleFinalTokens(string checkString)
-        {
-            if (string.IsNullOrEmpty(checkString))
-                return new DataContainer[0];
-            return m_Config.Tokens.Filter((x) => TokenValidationPredicates.Final(x, checkString));
+            Func<DataContainer, bool> TokensPotential = (x) => TokenValidationPredicates.Potential(x, checkString);
+            Func<DataContainer, bool> TokensFinal = (x) => TokenValidationPredicates.Final(x, checkString);
+
+            return m_Config.Tokens.Filter(final ? TokensFinal : TokensPotential);
         }
     }
 }

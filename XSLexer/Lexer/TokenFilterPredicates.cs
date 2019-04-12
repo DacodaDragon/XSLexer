@@ -6,7 +6,9 @@ namespace XSLexer.Lexer
 {
     static class TokenValidationPredicates
     {
-        public static bool PotentialTokenfilter(DataContainer x, string input)
+
+
+        public static bool Potential(DataContainer x, string input)
         {
             if (x.HasKey(TokenConsts.KEYWORD_WORD))
             {
