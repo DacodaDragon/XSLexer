@@ -66,8 +66,10 @@
     <Compile Include="Debug.cs" />
     <Compile Include="Tokenizer\LexConfig.cs" />
     <Compile Include="Tokenizer\LexData.cs" />
+    <Compile Include="Tokenizer\Lexer.cs" />
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />
+    <Compile Include="Tokenizer\TokenReplacer.cs" />
     <Compile Include="Tokenizer\TokenSet.cs" />
     <Compile Include="Tokenizer\TokenValidationPredicates.cs" />
     <Compile Include="Tokenizer\WordListDataSet.cs" />

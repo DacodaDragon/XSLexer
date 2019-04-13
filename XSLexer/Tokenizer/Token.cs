@@ -1,8 +1,8 @@
-﻿namespace XSLexer.Lexer
+﻿namespace XSLexer.Lexing
 {
     class Token
     {
-        public string Type { get; }
+        public string Type { get; set; }
         public string Value { get; }
 
         public Token(string Type, string Value)

@@ -2,7 +2,7 @@
 using XSLexer.Data;
 using System.Text.RegularExpressions;
 
-namespace XSLexer.Lexer
+namespace XSLexer.Lexing
 {
     static class TokenValidationPredicates
     {

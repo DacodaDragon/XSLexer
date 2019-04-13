@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XSLexer.Data;
 
-namespace XSLexer.Lexer
+namespace XSLexer.Lexing
 {
     class TokenDataSet : CustomDatasetBase
     {

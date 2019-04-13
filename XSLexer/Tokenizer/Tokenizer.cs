@@ -3,7 +3,7 @@ using XSLexer.Data;
 using System.Text;
 using System;
 
-namespace XSLexer.Lexer
+namespace XSLexer.Lexing
 {
 
     // This should probably be state machined somehow if we want more

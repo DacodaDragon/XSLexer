@@ -1,4 +1,4 @@
-﻿namespace XSLexer.Lexer
+﻿namespace XSLexer.Lexing
 {
     static class TokenConsts
     {

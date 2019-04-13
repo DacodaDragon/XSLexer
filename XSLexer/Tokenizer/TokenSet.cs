@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XSLexer.Lexer
+namespace XSLexer.Lexing
 {
     class TokenSet
     {

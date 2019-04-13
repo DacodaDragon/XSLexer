@@ -1,6 +1,6 @@
 ﻿using XSLexer.Data;
 
-namespace XSLexer.Lexer
+namespace XSLexer.Lexing
 {
     class LexConfig
     {

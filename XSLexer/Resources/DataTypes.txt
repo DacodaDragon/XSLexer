@@ -1,21 +1,21 @@
 # XS word Replacer
 # Format:
-# Listname:
-#	wordvalue : type
-#	wordvalue : type
-#	wordvalue : type
+# OldType:
+#	wordvalue : NewType
+#	wordvalue : NewType
+#	wordvalue : NewType
 
 # all dataTypes found in XS
-DataType>
+Word>
 	int: DatT
 	float: DatT
 	string: DatT
-	boolean: DatT
+	bool: DatT
 	vector: DatT
 	void: DatT
 
-# all reserved keywords ghin XS
-KeyWords>
+# all reserved keywords in XS
+Word>
 	if: KeyW
 	else: KeyW
 	switch: KeyW
@@ -29,3 +29,6 @@ KeyWords>
 	rule: KeyW
 	static: KeyW
 	const: KeyW
+	for: KeyW
+	true: KeyW
+	false: KeyW
