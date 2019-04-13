@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace XSLexer.Lexing
 {
@@ -11,13 +12,15 @@ namespace XSLexer.Lexing
         public long Length => m_Tokens.LongLength;
 
 
-        public Token[] GetAllOfType(string Type)
+        public bool GetAllOfType(string Type, out TokenSet tokens)
         {
+            tokens = null;
             if (m_Dictionary.TryGetValue(Type.GetHashCode(), out List<Token> list))
             {
-                return list.ToArray();
+                tokens = new TokenSet(list.ToArray());
+                return true;
             }
-            throw new System.Exception($"TokenSet does not contain any tokens of type \"{Type}\"");
+            return false;
         }
 
         private void AddToDict(Token token)
@@ -61,6 +64,20 @@ namespace XSLexer.Lexing
             {
                 AddToDict(m_Tokens[i]);
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < m_Tokens.Length; i++)
+            {
+                stringBuilder.Append($"T[{i}]: \t")
+                    .Append(m_Tokens[i].Type)
+                    .Append("\t== ")
+                    .Append(m_Tokens[i].Value)
+                    .Append("\n");
+            }
+            return stringBuilder.ToString();
         }
     }
 }

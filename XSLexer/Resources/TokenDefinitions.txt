@@ -11,89 +11,89 @@
 # Length	: [int]		# Length in characters this token HAS to be (equal)
 
 Word>
-	RegStart: [a-zA-Z_]
-	RegBody: [a-zA-Z0-9_]
+	CharStart: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
+	CharBody: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
 Brac>
-	RegStart: [{}[\]\(\)]
+	CharStart: {}[]()
 	Length: 1
 
 Oper>
-	RegStart: [+\-/*%&^!]
+	CharStart: +-/*%&^!
 	Length: 1
 
 AsOp>
-	RegStart: [\+\-\/\*\%\^]
-	RegBody: [\=]
+	CharStart: +-/*%^
+	CharBody: =
 	Length: 2
 
 Asgn> 
-	RegStart: [\=]
+	CharStart: =
 	Word: = 
 	Length: 1
 
-Comp>
-	RegStart: [\=\!\|\&]
-	RegBody: [\=\&\|]
+Comp1>
+	CharStart: =!|&
+	CharBody: =&|
 	Length: 2
 
-Comp>
+Comp2>
 	RegStart: [\<\>]
 	Length: 1
 
 ExpE>
-	RegStart: [\;]
+	CharStart: ;
 	Word: ;
 
 Cmma>
-	RegStart: [\,]
+	CharStart: ,
 	Word: ,
 
 Numb>
-	RegStart: [0-9.]
-	RegBody: [0-9.]
+	CharStart: 0123456789.
+	CharBody: 0123456789.
 
 SCmt>
-	RegStart: [/]
-	RegBody: [/]
+	CharStart: /
+	CharBody: /
 	Length: 2
 	Until: NewL
 
 MCmt>
-	RegStart: [/]
-	RegBody: [*]
+	CharStart: /
+	CharBody: *
 	Length: 2
 	UntilWith: MCme
 
 MCme>
-	RegStart: [*]
-	RegBody: [/]
+	CharStart: *
+	CharBody: /
 	Length: 2
 
 NewL>
-	RegStart: [\r]
-	RegBody: [\n]
+	CharStart: \r\n
+	CharBody: \r\n
 	Length: 2
 
 Spac>
-	RegStart: [ \t]
-	RegBody: [ \t]
+	CharStart: \s\t
+	CharBody: \s\t
 
 Coln>
-	RegStart: [:]
+	CharStart: :
 	Word: :
 
 Stri>
-	RegStart: [\"]
+	CharStart: \"
 	Word: "
 	UntilWith: Stri
 
 Squo>
-	RegStart: [\']
+	CharStart: \'
 	Word: '
 	UntilWith: Squo
 
 Escp>
-	RegStart: [\\]
-	RegBody: [\"\'n]
+	CharStart: \
+	CharBody: \"\'n
 	Length: 2

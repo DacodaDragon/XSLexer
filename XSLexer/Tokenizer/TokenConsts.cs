@@ -8,6 +8,9 @@
         public const string KEYWORD_ROOT = "Root";
         public const string KEYWORD_REGSTART = "RegStart";
         public const string KEYWORD_REGBODY = "RegBody";
+        public const string KEYWORD_CHARSTART = "CharStart";
+        public const string KEYWORD_CHARBODY = "CharBody";
+
         public const string KEYWORD_WORD = "Word";
         public const string KEYWORD_LENGTH = "Length";
         public const string KEYWORD_UNTIL = "Until";

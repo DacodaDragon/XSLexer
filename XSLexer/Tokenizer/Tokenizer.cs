@@ -38,7 +38,7 @@ namespace XSLexer.Lexing
 
         public TokenSet Tokenize(string code)
         {
-            m_Code = code;
+            m_Code = code + "\n";
             while (CreateNextToken(out Token token))
             {
                 m_Tokens.Add(token);
@@ -61,7 +61,9 @@ namespace XSLexer.Lexing
             for (; m_Index < m_Code.Length; m_Index++)
             {
                 if (m_Code[m_Index] == '\n')
-                    m_Line++;
+                    if (++m_Line % 1000 == 0)
+                        Debug.Log(m_Line);
+
 
                 m_Buffer.Append(m_Code[m_Index]);
 
@@ -108,6 +110,10 @@ namespace XSLexer.Lexing
             DataContainer searchData = m_Config.Tokens.All.GetSet(searchType);
             for (; m_Index < m_Code.Length; m_Index++)
             {
+                if (m_Code[m_Index] == '\n')
+                    if (++m_Line % 1000 == 0)
+                        Debug.Log(m_Line);
+
                 m_Buffer.Append(m_Code[m_Index]);
 
                 bool HasPotential = TokenValidationPredicates.Potential(searchData, m_Buffer.ToString());
@@ -124,9 +130,6 @@ namespace XSLexer.Lexing
 
                     if (isFinal)
                     {
-                        if (!m_SearchInclusive)
-                            m_Index -= searchData.Length;
-
                         int length = m_Index - startIndex;
                         m_SearchFlag = "";
                         m_Buffer.Clear();

@@ -22,6 +22,18 @@ namespace XSLexer.Lexing
                     return false;
             }
 
+            if (x.HasKey(TokenConsts.KEYWORD_CHARSTART))
+            {
+                if (!CharMatch(input[0], x.GetValue(TokenConsts.KEYWORD_CHARSTART).value))
+                    return false;
+            }
+
+            if (input.Length > 1 && x.HasKey(TokenConsts.KEYWORD_CHARBODY))
+            {
+                if (!CharMatch(input.Substring(1), x.GetValue(TokenConsts.KEYWORD_CHARBODY).value))
+                    return false;
+            }
+
             if (x.HasKey(TokenConsts.KEYWORD_LENGTH))
             {
                 int length = ParseInt(x, TokenConsts.KEYWORD_LENGTH);
@@ -52,6 +64,18 @@ namespace XSLexer.Lexing
                     return false;
             }
 
+            if (x.HasKey(TokenConsts.KEYWORD_CHARSTART))
+            {
+                if (!CharMatch(input[0], x.GetValue(TokenConsts.KEYWORD_CHARSTART).value))
+                    return false;
+            }
+
+            if (input.Length > 1 && x.HasKey(TokenConsts.KEYWORD_CHARBODY))
+            {
+                if (!CharMatch(input.Substring(1), x.GetValue(TokenConsts.KEYWORD_CHARBODY).value))
+                    return false;
+            }
+
             if (x.HasKey(TokenConsts.KEYWORD_LENGTH))
             {
                 int length = ParseInt(x, TokenConsts.KEYWORD_LENGTH);
@@ -78,6 +102,26 @@ namespace XSLexer.Lexing
                 throw new System.Exception($"Tried parsing int from token key {Keyword} in {dataContainer.Name} but failed");
             }
             return length;
+        }
+
+        private static bool CharMatch(string input, string pattern)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (!CharMatch(input[i], pattern))
+                    return false;
+            }
+            return true;
+        }
+
+        private static bool CharMatch(char input, string pattern)
+        {
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                if (input == pattern[i])
+                    return true;
+            }
+            return false;
         }
 
         private static bool RequirementRecursiveRegexCheck(DataContainer container, string input, string key)

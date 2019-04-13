@@ -18,24 +18,30 @@ namespace XSLexer.Data
 
         public DataValue GetValue(string key)
         {
-            return Resolve(key);
+            if (Resolve(key, out DataValue dataValue))
+            {
+                return dataValue;
+            }
+            throw new System.Exception($"Key \"{key}\" not found in DataContainer \"{Name}\"");
         }
 
         public bool HasKey(string key)
         {
-            return !Resolve(key).isEmpty;
+            return Resolve(key, out DataValue value);
         }
 
-        private DataValue Resolve(string key)
+        private bool Resolve(string key, out DataValue value)
         {
+            value = null;
             for (int i = 0; i < m_DataValues.Length; i++)
             {
                 if (m_DataValues[i].key == key)
                 {
-                    return m_DataValues[i];
+                    value = m_DataValues[i];
+                    return true;
                 }
             }
-            return new DataValue("", "");
+            return false;
         }
 
 
@@ -52,7 +58,10 @@ namespace XSLexer.Data
 
         public DataValue this[string key]
         {
-            get { return Resolve(key); }
+            get
+            {
+                return GetValue(key);
+            }
         }
 
         public override string ToString()

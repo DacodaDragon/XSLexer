@@ -16,14 +16,17 @@ namespace XSLexer.Lexing
             DataContainer[] wordDef = lexConfig.WordDefinitions.All;
             for (int i = 0; i < wordDef.Length; i++)
             {
-                Token[] tokens = set.GetAllOfType(wordDef[i].Name);
-                for (int j = 0; j < tokens.Length; j++)
+                TokenSet tokens;
+                if (set.GetAllOfType(wordDef[i].Name, out tokens))
                 {
-                    for (int k = 0; k < wordDef[i].Length; k++)
+                    for (int j = 0; j < tokens.Length; j++)
                     {
-                        if (tokens[j].Value == wordDef[i][k].key)
+                        for (int k = 0; k < wordDef[i].Length; k++)
                         {
-                            tokens[j].Type = wordDef[i][k].value;
+                            if (tokens[j].Value == wordDef[i][k].key)
+                            {
+                                tokens[j].Type = wordDef[i][k].value;
+                            }
                         }
                     }
                 }
