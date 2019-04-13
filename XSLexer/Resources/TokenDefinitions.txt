@@ -67,9 +67,11 @@ MCme>
 	CharBody: [/]
 	Length: 2
 
+# CrLf
 NewL>
-	CharStart: [\n]
-	Length: 1
+	CharStart: [\r]
+	CharBody: [\n]
+	Length: 2
 
 Spac>
 	CharStart: [ ]
