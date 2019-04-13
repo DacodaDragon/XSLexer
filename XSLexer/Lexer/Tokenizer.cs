@@ -2,7 +2,6 @@
 using XSLexer.Data;
 using System.Text;
 using System;
-using System.Text.RegularExpressions;
 
 namespace XSLexer.Lexer
 {
@@ -88,6 +87,8 @@ namespace XSLexer.Lexer
 
         private void SkipUnknownChar()
         {
+            if (string.IsNullOrEmpty(m_SearchFlag))
+            Debug.Warn($"Didn't tokenize {m_Buffer.ToString()}");
             m_Buffer.Remove(m_Buffer.Length - 1, 1);
         }
 
