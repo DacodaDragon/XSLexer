@@ -14,6 +14,17 @@ namespace XSLexer
 
             TokenSet tokenSet = new Lexer(config).Lex(Resources.XsFunction);
 
+            Debug.Log("STATS:");
+            Debug.Log($"Contains {tokenSet.Length} tokens!");
+            for (int i = 0; i < config.Tokens.All.Length; i++)
+            {
+                if (tokenSet.GetAllOfType(config.Tokens.All.GetSet(i).Name, out TokenSet set))
+                {
+                    Debug.Log($"Contains type [{config.Tokens.All.GetSet(i).Name}] {set.Length} times!");
+                }
+            }
+
+
             Debug.Log("Tokens found: " + tokenSet.Length);
             //Debug.Log(tokenSet);
 
