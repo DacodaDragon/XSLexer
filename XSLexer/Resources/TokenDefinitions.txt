@@ -38,6 +38,10 @@ Comp>
 	CharBody: [\=\&\|]
 	Length: 2
 
+Comp>
+	CharStart: [\<\>]
+	Length: 1
+
 ExpE>
 	CharStart: [\;]
 	Word: ;
@@ -74,14 +78,24 @@ NewL>
 	Length: 2
 
 Spac>
-	CharStart: [ ]
-	CharBody: [ ]
+	CharStart: [ \t]
+	CharBody: [ \t]
+
+Coln>
+	CharStart: [:]
+	Word: :
 
 Stri>
 	CharStart: [\"]
 	Word: "
 	UntilWith: Stri
 
-Coln>
-	CharStart: [:]
-	Word: :
+Squo>
+	CharStart: [\']
+	Word: '
+	UntilWith: Squo
+
+Escp>
+	CharStart: [\\]
+	CharBody: [\"\'n]
+	Length: 2
