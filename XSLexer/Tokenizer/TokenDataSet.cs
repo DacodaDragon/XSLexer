@@ -5,10 +5,10 @@ namespace XSLexer.Lexing
 {
     class TokenDataSet : CustomDatasetBase
     {
-        public DataContainer[] Root { get; }
-        public DataContainer[] All { get; }
+        public DataSet Root { get; }
+        public DataSet All { get; }
 
-        public DataContainer[] Filter(System.Func<DataContainer, bool> Predicate)
+        public DataSet Filter(System.Func<DataContainer, bool> Predicate)
         {
             List<DataContainer> filter = new List<DataContainer>();
 
@@ -20,10 +20,10 @@ namespace XSLexer.Lexing
                 }
             }
 
-            return filter.ToArray();
+            return new DataSet("filtered", filter.ToArray());
         }
 
-        private DataContainer[] FindAllTokens()
+        private DataSet FindAllTokens()
         {
             List<DataContainer> tokens = new List<DataContainer>();
             for (int i = 0; i < m_DataSets.Length; i++)
@@ -33,7 +33,7 @@ namespace XSLexer.Lexing
                     tokens.Add(m_DataSets[i][j]);
                 }
             }
-            return tokens.ToArray();
+            return new DataSet("all", tokens.ToArray());
         }
 
         public TokenDataSet(DataSet[] dataSets) : base(dataSets)

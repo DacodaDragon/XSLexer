@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace XSLexer.Lexing
 {
     static class TokenValidationPredicates
-    {
+    { 
         public static bool Potential(DataContainer x, string input)
         {
             if (x.HasKey(TokenConsts.KEYWORD_WORD))
@@ -15,7 +15,6 @@ namespace XSLexer.Lexing
                 // if checkstring is longer than our 'word' it can't be this token
                 if (input.Length > word.Length)
                     return false;
-
 
                 string wordSubstring = word.Substring(0, input.Length);
 

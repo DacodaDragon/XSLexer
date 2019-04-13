@@ -4,8 +4,6 @@ using XSLexer.Data;
 
 namespace XSLexer
 {
-
-
     class Program
     {
         static void Main(string[] args)
@@ -15,7 +13,7 @@ namespace XSLexer
                 new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
 
             TokenSet tokenSet = new Lexer(config).Lex(Resources.XsFunction);
-            Token[] tokens = tokenSet.GetAllOfType("DatT");
+            Token[] tokens = tokenSet.GetAllOfType("Word");
 
             Debug.Log("Tokens found: " + tokens.Length);
             for (int i = 0; i < tokens.Length; i++)
