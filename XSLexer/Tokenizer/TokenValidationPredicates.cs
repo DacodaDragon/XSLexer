@@ -30,7 +30,7 @@ namespace XSLexer.Lexing
 
             if (input.Length > 1 && x.HasKey(TokenConsts.KEYWORD_CHARBODY))
             {
-                if (!CharMatch(input.Substring(1), x.GetValue(TokenConsts.KEYWORD_CHARBODY).value))
+                if (!CharMatch(input[input.Length-1], x.GetValue(TokenConsts.KEYWORD_CHARBODY).value))
                     return false;
             }
 
