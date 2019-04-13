@@ -8,21 +8,21 @@ namespace XSLexer
         public static void Log(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("INFO: " + message);
+            Console.WriteLine("Log: " + message);
         }
 
         public static void Error(object message) => Error(message.ToString());
         public static void Error(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ERRO: " + message);
+            Console.WriteLine("Err: " + message);
         }
 
         public static void Warn(object message) => Warn(message.ToString());
         public static void Warn(string message)
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("WARN: " + message);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("War: " + message);
         }
 
         public static void Pause()
