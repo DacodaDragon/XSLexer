@@ -1,7 +1,6 @@
 ﻿using XSLexer.Properties;
 using XSLexer.Lexer;
 using XSLexer.Data;
-using System.Diagnostics;
 
 namespace XSLexer
 {
@@ -9,22 +8,17 @@ namespace XSLexer
     {
         static void Main(string[] args)
         {
+            LexConfig config = new LexConfig(
+                new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) },
+                new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
 
-            Stopwatch watch = Stopwatch.StartNew();
-            LexConfig config = new LexConfig(new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) });
-            watch.Stop();
-            Debug.Log($"Parsed for {watch.ElapsedMilliseconds}ms");
-
-            watch.Restart();
             Token[] tokens = new Tokenizer(config).Tokenize(Resources.XsFunction);
-            watch.Stop();
-            Debug.Log($"Parsed for {watch.ElapsedMilliseconds}ms");
 
             Debug.Log("Tokens found: " + tokens.Length);
-            //for (int i = 0; i < tokens.Length; i++)
-            //{
-            //    Debug.Log($"Tok[{i}]: \t" + tokens[i].Type + "\t== " + tokens[i].Value);
-            //}
+            for (int i = 0; i < tokens.Length; i++)
+            {
+                Debug.Log($"Tok[{i}]: \t" + tokens[i].Type + "\t== " + tokens[i].Value);
+            }
 
             Debug.Pause();
         }
