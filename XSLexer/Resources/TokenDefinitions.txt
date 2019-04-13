@@ -32,13 +32,13 @@ Asgn>
 	Word: = 
 	Length: 1
 
-Comp1>
+Comp>
 	CharStart: =!|&
 	CharBody: =&|
 	Length: 2
 
-Comp2>
-	RegStart: [\<\>]
+Comp>
+	CharStart: ><
 	Length: 1
 
 ExpE>
