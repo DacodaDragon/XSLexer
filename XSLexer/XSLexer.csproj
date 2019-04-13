@@ -58,17 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataContainer.cs" />
+    <Compile Include="Data\DataSetParser.cs" />
     <Compile Include="Lexer\CustomDatasetBase.cs" />
-    <Compile Include="Data\DataFileParser.cs" />
     <Compile Include="Data\DataSet.cs" />
     <Compile Include="Data\DataValue.cs" />
-    <Compile Include="Data\DataValueList.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Lexer\LexConfig.cs" />
-    <Compile Include="Lexer\Lexer.cs" />
+    <Compile Include="Lexer\LexData.cs" />
     <Compile Include="Lexer\Token.cs" />
-    <Compile Include="Lexer\TokenFilterPredicates.cs" />
-    <Compile Include="Lexer\WordDataSet.cs" />
+    <Compile Include="Lexer\Tokenizer.cs" />
+    <Compile Include="Lexer\TokenValidationPredicates.cs" />
+    <Compile Include="Lexer\WordListDataSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
