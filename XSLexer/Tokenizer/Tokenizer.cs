@@ -61,8 +61,8 @@ namespace XSLexer.Lexing
             for (; m_Index < m_Code.Length; m_Index++)
             {
                 if (m_Code[m_Index] == '\n')
-                    if (++m_Line % 1000 == 0)
-                        Debug.Log(m_Line);
+                    if (++m_Line % 5000 == 0)
+                        Debug.Log("Status: Line " + m_Line);
 
 
                 m_Buffer.Append(m_Code[m_Index]);
@@ -111,8 +111,9 @@ namespace XSLexer.Lexing
             for (; m_Index < m_Code.Length; m_Index++)
             {
                 if (m_Code[m_Index] == '\n')
-                    if (++m_Line % 1000 == 0)
-                        Debug.Log(m_Line);
+                    if (++m_Line % 5000 == 0)
+                        Debug.Log("Status: Line " + m_Line);
+
 
                 m_Buffer.Append(m_Code[m_Index]);
 

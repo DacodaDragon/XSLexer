@@ -11,6 +11,13 @@ namespace XSLexer
             Console.WriteLine("Log: " + message);
         }
 
+        public static void Imp(object message) => Imp(message.ToString());
+        public static void Imp(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Log: " + message);
+        }
+
         public static void Error(object message) => Error(message.ToString());
         public static void Error(string message)
         {
