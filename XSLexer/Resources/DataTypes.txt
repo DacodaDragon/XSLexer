@@ -1,23 +1,31 @@
-# XS dataType Configuration
-#
-# Base XS DataTypes:
-# - boolean
-# - int
-# - float
-# - string
+# XS word Replacer
+# Format:
+# Listname:
+#	wordvalue : type
+#	wordvalue : type
+#	wordvalue : type
 
-# == Allowed DataTypes
-XsDataTypes>
-	int: int
-	float: float
-	string: string
-	boolean: boolean
-	vector: vector
+# all dataTypes found in XS
+DataType>
+	int: DatT
+	float: DatT
+	string: DatT
+	boolean: DatT
+	vector: DatT
+	void: DatT
 
-# == Allowed Function DataTypes
-XsFunctionReturnTypes>
-	int: int
-	float: float
-	string: string
-	boolean: boolean
-	void: void
+# all reserved keywords ghin XS
+KeyWords>
+	if: KeyW
+	else: KeyW
+	switch: KeyW
+	case: KeyW
+	return: KeyW
+	break: KeyW
+	breakpoint: KeyW
+	mutable: KeyW
+	extern: KeyW
+	include: KeyW
+	rule: KeyW
+	static: KeyW
+	const: KeyW
