@@ -68,6 +68,7 @@
     <Compile Include="Tokenizer\LexData.cs" />
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\Tokenizer.cs" />
+    <Compile Include="Tokenizer\TokenSet.cs" />
     <Compile Include="Tokenizer\TokenValidationPredicates.cs" />
     <Compile Include="Tokenizer\WordListDataSet.cs" />
     <Compile Include="Program.cs" />

@@ -12,7 +12,8 @@ namespace XSLexer
                 new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) },
                 new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
 
-            Token[] tokens = new Tokenizer(config).Tokenize(Resources.XsFunction);
+            TokenSet tokenSet = new Tokenizer(config).Tokenize(Resources.XsFunction);
+            Token[] tokens = tokenSet.GetAllOfType("Word");
 
             Debug.Log("Tokens found: " + tokens.Length);
             for (int i = 0; i < tokens.Length; i++)

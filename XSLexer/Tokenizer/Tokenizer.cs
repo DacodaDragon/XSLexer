@@ -2,17 +2,17 @@
 using XSLexer.Data;
 using System.Text;
 using System;
-using System.Text.RegularExpressions;
 
 namespace XSLexer.Lexer
 {
+
     // This should probably be state machined somehow if we want more
     class Tokenizer
     {
         private DataContainer[] m_Previous = new DataContainer[0];
         private DataContainer[] m_Current = new DataContainer[0];
 
-        private List<Token> m_Tokens = new List<Token>();
+        private List<Token> m_Tokens = new List<Token>(1 << 19);
         private StringBuilder m_Buffer = new StringBuilder(32);
 
         private string m_Code = "";
@@ -36,7 +36,7 @@ namespace XSLexer.Lexer
             m_Index = 0;
         }
 
-        public Token[] Tokenize(string code)
+        public TokenSet Tokenize(string code)
         {
             m_Code = code + '\n';
 
@@ -49,10 +49,10 @@ namespace XSLexer.Lexer
 
             }
 
-            Token[] TokenArray = m_Tokens.ToArray();
+            TokenSet Set = new TokenSet(m_Tokens.ToArray());
 
             Reset();
-            return TokenArray;
+            return Set;
         }
 
         public bool CreateNextToken(out Token token)
