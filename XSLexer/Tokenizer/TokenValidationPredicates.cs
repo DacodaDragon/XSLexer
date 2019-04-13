@@ -29,10 +29,10 @@ namespace XSLexer.Lexing
                     return false;
             }
 
-            if (!RequirementRegexCheck(x, new string(input[0], 1), TokenConsts.KEYWORD_CHARSTART))
+            if (!RequirementRegexCheck(x, new string(input[0], 1), TokenConsts.KEYWORD_REGSTART))
                 return false;
 
-            if (input.Length > 1 && !RequirementRecursiveRegexCheck(x, input.Substring(1), TokenConsts.KEYWORD_CHARBODY))
+            if (input.Length > 1 && !RequirementRecursiveRegexCheck(x, input.Substring(1), TokenConsts.KEYWORD_REGBODY))
                 return false;
 
             return true;
@@ -59,12 +59,12 @@ namespace XSLexer.Lexing
                     return false;
             }
 
-            if (!RequirementRegexCheck(x, new string(input[0], 1), TokenConsts.KEYWORD_CHARSTART))
+            if (!RequirementRegexCheck(x, new string(input[0], 1), TokenConsts.KEYWORD_REGSTART))
                 return false;
 
             if (input.Length > 1)
             {
-                if (!RequirementRecursiveRegexCheck(x, input.Substring(1), TokenConsts.KEYWORD_CHARBODY))
+                if (!RequirementRecursiveRegexCheck(x, input.Substring(1), TokenConsts.KEYWORD_REGBODY))
                     return false;
             }
 

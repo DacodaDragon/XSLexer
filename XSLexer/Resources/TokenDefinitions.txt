@@ -5,97 +5,95 @@
 # UntilWith	: [String]  # Include everything Until another token is found, Including the found token
 #
 # == Validation ==
-# CharStart : [Regex]	# The regex that needs to be valid on the first character
-# CharBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
-# Word		: [String]   # The regex with the specific word it needs to be to be that token. >> CharStart and CharBody are required.
+# RegStart	: [Regex]	# The regex that needs to be valid on the first character
+# RegBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
+# Word		: [String]  # The regex with the specific word it needs to be to be that token. >> CharStart and CharBody are required.
 # Length	: [int]		# Length in characters this token HAS to be (equal)
 
-# CharStart isn't a word, since numeric isn't allowed. 
 Word>
-	CharStart: [a-zA-Z_]
-	CharBody: [a-zA-Z0-9_]
+	RegStart: [a-zA-Z_]
+	RegBody: [a-zA-Z0-9_]
 
 Brac>
-	CharStart: [{}[\]\(\)]
+	RegStart: [{}[\]\(\)]
 	Length: 1
 
 Oper>
-	CharStart: [+\-/*%&^!]
+	RegStart: [+\-/*%&^!]
 	Length: 1
 
 AsOp>
-	CharStart: [\+\-\/\*\%\^]
-	CharBody: [\=]
+	RegStart: [\+\-\/\*\%\^]
+	RegBody: [\=]
 	Length: 2
 
 Asgn> 
-	CharStart: [\=]
+	RegStart: [\=]
 	Word: = 
 	Length: 1
 
 Comp>
-	CharStart: [\=\!\|\&]
-	CharBody: [\=\&\|]
+	RegStart: [\=\!\|\&]
+	RegBody: [\=\&\|]
 	Length: 2
 
 Comp>
-	CharStart: [\<\>]
+	RegStart: [\<\>]
 	Length: 1
 
 ExpE>
-	CharStart: [\;]
+	RegStart: [\;]
 	Word: ;
 
 Cmma>
-	CharStart: [\,]
+	RegStart: [\,]
 	Word: ,
 
 Numb>
-	CharStart: [0-9.]
-	CharBody: [0-9.]
+	RegStart: [0-9.]
+	RegBody: [0-9.]
 
 SCmt>
-	CharStart: [/]
-	CharBody: [/]
+	RegStart: [/]
+	RegBody: [/]
 	Length: 2
 	Until: NewL
 
 MCmt>
-	CharStart: [/]
-	CharBody: [*]
+	RegStart: [/]
+	RegBody: [*]
 	Length: 2
 	UntilWith: MCme
 
 MCme>
-	CharStart: [*]
-	CharBody: [/]
+	RegStart: [*]
+	RegBody: [/]
 	Length: 2
 
-# CrLf
 NewL>
-	CharStart: [\r]
-	CharBody: [\n]
+	RegStart: [\r]
+	RegBody: [\n]
 	Length: 2
 
 Spac>
-	CharStart: [ \t]
-	CharBody: [ \t]
+	RegStart: [ \t]
+	RegBody: [ \t]
 
 Coln>
-	CharStart: [:]
+	RegStart: [:]
 	Word: :
 
 Stri>
-	CharStart: [\"]
+	RegStart: [\"]
 	Word: "
 	UntilWith: Stri
 
 Squo>
-	CharStart: [\']
+	RegStart: [\']
 	Word: '
 	UntilWith: Squo
 
 Escp>
-	CharStart: [\\]
-	CharBody: [\"\'n]
+	RegStart: [\\]
+	RegBody: [\"\'n]
 	Length: 2
