@@ -48,7 +48,6 @@ namespace XSLexer.Data
 
         private string Escape(string value)
         {
-            Debug.Warn(value);
             switch (value)
             {
                 case "\\n": return "\n";
