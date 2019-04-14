@@ -28,12 +28,12 @@ FuncImpl>
 
 FuncName>
 	Type: Word
-	FollowedBy: FuncParamStart
+	FollowedBy: FuncParamOpen
 
 FuncParamOpen>
 	Type: Brac
 	Value: (
-	FollowedBy: FuncParam
+	FollowedBy: FuncParamEnd
 
 FuncParamEnd>
 	Type: Brac

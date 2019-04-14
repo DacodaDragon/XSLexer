@@ -11,7 +11,6 @@ namespace XSLexer.Lexing
         public Token this[long i] => m_Tokens[i];
         public long Length => m_Tokens.LongLength;
 
-
         public bool GetAllOfType(string Type, out TokenSet tokens)
         {
             tokens = null;
@@ -21,6 +20,26 @@ namespace XSLexer.Lexing
                 return true;
             }
             return false;
+        }
+
+        public TokenSet FilterOut(params string[] types)
+        {
+            List<Token> tokens = new List<Token>(m_Tokens);
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                for (int j = 0; j < types.Length; j++)
+                {
+                    if (tokens[i].Type == types[j])
+                    {
+                        tokens.RemoveAt(i);
+                        i--;
+                        break;
+                    }
+                }
+            }
+
+            return new TokenSet(tokens.ToArray());
         }
 
         private void AddToDict(Token token)

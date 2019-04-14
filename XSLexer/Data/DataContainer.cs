@@ -30,6 +30,11 @@ namespace XSLexer.Data
             return Resolve(key, out DataValue value);
         }
 
+        public bool HasKey(string key, out DataValue value)
+        {
+            return Resolve(key, out value);
+        }
+
         private bool Resolve(string key, out DataValue value)
         {
             value = null;

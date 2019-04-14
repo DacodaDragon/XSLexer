@@ -4,6 +4,12 @@ namespace XSLexer
 {
     static class Debug
     {
+        public static void Show(string message, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(message);
+        }
+
         public static void Log(object message) => Log(message.ToString());
         public static void Log(string message)
         {
