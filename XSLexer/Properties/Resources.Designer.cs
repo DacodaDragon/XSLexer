@@ -61,28 +61,40 @@ namespace XSLexer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # XS dataType Configuration
-        ///#
-        ///# Base XS DataTypes:
-        ///# - boolean
-        ///# - int
-        ///# - float
-        ///# - string
+        ///   Looks up a localized string similar to # XS word Replacer
+        ///# Format:
+        ///# OldType:
+        ///#	wordvalue : NewType
+        ///#	wordvalue : NewType
+        ///#	wordvalue : NewType
         ///
-        ///# == Allowed DataTypes
-        ///XsDataTypes&gt;
-        ///	int: int
-        ///	float: float
-        ///	string: string
-        ///	boolean: boolean
+        ///# all dataTypes found in XS
+        ///Word&gt;
+        ///	int: DatT
+        ///	float: DatT
+        ///	string: DatT
+        ///	bool: DatT
+        ///	vector: DatT
+        ///	void: DatT
         ///
-        ///# == Allowed Function DataTypes
-        ///XsFunctionReturnTypes&gt;
-        ///	int: int
-        ///	float: float
-        ///	string: string
-        ///	boolean: boolean
-        ///	void: void.
+        ///# all reserved keywords in XS
+        ///Word&gt;
+        ///	if: KeyW
+        ///	else: KeyW
+        ///	switch: KeyW
+        ///	case: KeyW
+        ///	return: KeyW
+        ///	break: KeyW
+        ///	breakpoint: KeyW
+        ///	mutable: KeyW
+        ///	extern: KeyW
+        ///	include: KeyW
+        ///	rule: KeyW
+        ///	static: KeyW
+        ///	const: KeyW
+        ///	for: KeyW
+        ///	true: KeyW
+        ///	false: KeyW.
         /// </summary>
         internal static string DataTypes {
             get {
@@ -91,13 +103,16 @@ namespace XSLexer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # XS Tokenization chart using regular expression
+        ///   Looks up a localized string similar to # First phase tokenization chart using regular expression
         ///# 
-        ///# Root		: [bool]	# Can this token be made without any prior context?
-        ///# CharStart : [Regex]	# The regex that needs to be valid on the first character
-        ///# CharBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
-        ///# WordsDef	: [Ref]		# Name to a list of words defined anywhere else in the file.		&gt;&gt; CharStart and CharBody are required.
-        ///# Word		: [Regex]   # The regex with the specific word it needs to be to be that  [rest of string was truncated]&quot;;.
+        ///# == Misc ==
+        ///# Until		: [String]  # Include everything Until another token is found
+        ///# UntilWith	: [String]  # Include everything Until another token is found, Including the found token
+        ///#
+        ///# == Validation ==
+        ///# RegStart	: [Regex]	# The regex that needs to be valid on the first character
+        ///# RegBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
+        ///# Word		: [String]  # The regex with the specific word i [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string TokenDefinitions {
             get {
@@ -106,13 +121,40 @@ namespace XSLexer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to void Main() {
+        ///   Looks up a localized string similar to /* Ultimate True Random Map
+        ///** Made by Hagrit and DaCoda
+        ///** 
+        ///** DaCoda: Have fun reading this
+        ///** 
+        ///*/
         ///
-        ///}.
+        ///string GetNormalWalkableTerrainType()
+        ///{
+        ///	int TerrainType = rmRandInt(0,49);
+        ///	switch (TerrainType)
+        ///	{		
+        ///		case 0: return (&quot;CityTileA&quot;);
+        ///		case 1: return (&quot;CityTileAtlantis&quot;);
+        ///		case 2: return (&quot;CityTileAtlantiscoral&quot;);
+        ///		case 3: return (&quot;CliffGreekB&quot;);
+        ///		case 4: return (&quot;CliffEgyptianB&quot;);
+        ///		case 5: return (&quot;CliffNorseB&quot;);
+        ///		case 6: return (&quot;DirtA&quot;);
+        ///		case 7: return (&quot;EgyptianRoadA&quot;);
+        ///		c [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string XsFunction {
             get {
                 return ResourceManager.GetString("XsFunction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string XsGrammarConfig {
+            get {
+                return ResourceManager.GetString("XsGrammarConfig", resourceCulture);
             }
         }
     }

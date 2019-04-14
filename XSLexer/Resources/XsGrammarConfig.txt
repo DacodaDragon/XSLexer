@@ -1,0 +1,51 @@
+# XS Grammar rules
+#
+# Current Incoming Tokens:
+# - Word	# Any word that isn't a reserved type
+# - Brac	# Brackets
+# - Oper	# Operators
+# - AsOp	# Assignment Operators
+# - Asgn	# Assignment
+# - Comp	# Comparison operatros
+# - Semc	# Semicolon
+# - Cmma	# Comma
+# - Numb	# Number
+# - SCmt	# Single line comment
+# - MCmt	# multi Line Comment
+# - NewL	# New Line
+# - Spac	# Spaces and Tabs (or series of them)
+# - Coln	# Colon
+# - Stri	# String
+# - Squo	# Single Quote
+# - DatT	# DataType
+# - KeyW	# Keyword
+
+# Function Implementation
+FuncImpl>
+	Root: True
+	Type: DatT
+	FollowedBy: FuncName
+
+FuncName>
+	Type: Word
+	FollowedBy: FuncParamStart
+
+FuncParamOpen>
+	Type: Brac
+	Value: (
+	FollowedBy: FuncParam
+
+FuncParamEnd>
+	Type: Brac
+	Value: )
+	FollowedBy: FuncBodyOpen
+
+FuncBodyOpen>
+	Type: Brac
+	Value: {
+	FollowedBy: FuncBodyClose
+	Until: FuncBodyClose
+
+FuncBodyClose>
+	Type: Brac
+	Value: }

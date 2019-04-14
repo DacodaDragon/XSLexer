@@ -41,7 +41,7 @@ Comp>
 	CharStart: ><
 	Length: 1
 
-ExpE>
+Semc>
 	CharStart: ;
 	Word: ;
 
