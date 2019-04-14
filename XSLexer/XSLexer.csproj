@@ -62,6 +62,7 @@
     <Compile Include="Data\DataSetParser.cs" />
     <Compile Include="StructureConfig.cs" />
     <Compile Include="StructureConsts.cs" />
+    <Compile Include="StructureToken.cs" />
     <Compile Include="Structurizer.cs" />
     <Compile Include="Tokenizer\CustomDatasetBase.cs" />
     <Compile Include="Data\DataSet.cs" />

@@ -2,45 +2,9 @@
 using XSLexer.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System;
 
 namespace XSLexer
 {
-    class StructureToken : Token
-    {
-        public string StructType { get; set; }
-        public StructureToken Parent { get; set; }
-        public List<StructureToken> Childs { get; } = new List<StructureToken>();
-
-        public StructureToken(Token baseToken) : base(baseToken.Type, baseToken.Value, baseToken.LineNumber)
-        {
-
-        }
-
-        public override string ToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(StructType).Append(":").Append(Value).Append('\n');
-            for (int i = 0; i < Childs.Count; i++)
-            {
-                stringBuilder.Append(Childs[i].ToString(2)).Append('\n');
-            }
-            return stringBuilder.ToString();
-        }
-
-        private object ToString(int v)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(' ', v).Append(StructType).Append(":").Append(Value).Append('\n');
-            for (int i = 0; i < Childs.Count; i++)
-            {
-                stringBuilder.Append(Childs[i].ToString(v+2)).Append('\n');
-            }
-            return stringBuilder.ToString();
-        }
-    }
-
     class Structurizer
     {
         private StructureConfig m_Config { get; set; }
@@ -95,9 +59,23 @@ namespace XSLexer
                 if (Followups.Length == 0)
                     return structureToken;
 
-                // If there is something that should follow me
-                // parse the next one and add it to my childs
-                // TODO: Should support until functionality right here. 
+                // If this structure continues until another structure is found
+                // continue parsing children until the until value is met
+                if (potentials[0].HasKey(TokenConsts.KEYWORD_UNTIL, out DataValue until))
+                {
+                    StructureToken structure;
+                    do // EBIL
+                    {
+                        structure = ParseNext(Followups);
+                        structureToken.Childs.Add(structure);
+
+                    } while (structure.StructType != until.value);
+
+                    // Return when we met the child ender
+                    return structureToken;
+                }
+
+                // Add the next token, leave
                 structureToken.Childs.Add(ParseNext(Followups));
                 return structureToken;
             }
@@ -109,18 +87,31 @@ namespace XSLexer
 
             // When this token is parsed, check what I could have been with
             // the type the next tokend became. 
-            DataSet set = potentials.Filter(x => x.Name == nextToken.Type);
+            DataSet set = RequirementsFilter(nextToken, potentials);
 
             // If we have only one thing we could have been at this point, hurray!
             // we know what we are. 
-            if (set.Length == 0)
+            if (set.Length == 1)
             {
                 StructureToken structureToken = new StructureToken(token);
-                structureToken.Type = set[0].Name;
+                structureToken.StructType = set[0].Name;
                 structureToken.Childs.Add(nextToken);
 
-                // TODO: check if there are remaining children to be parsed
+                // If this structure continues until another structure is found
+                // continue parsing children until the until value is met
+                if (set[0].HasKey(TokenConsts.KEYWORD_UNTIL, out DataValue until))
+                {
+                    StructureToken structure;
+                    do // EBIL
+                    {
+                        structure = ParseNext(set);
+                        structureToken.Childs.Add(structure);
 
+                    } while (structure.StructType != until.value);
+
+                    // Return when we met the child ender
+                    return structureToken;
+                }
                 return structureToken;
             }
 
@@ -162,17 +153,24 @@ namespace XSLexer
             });
         }
 
+        private DataSet RequirementsFilter(StructureToken structureToken, DataSet Followups)
+        {
+            return Followups.Filter((x) => {
+                if (x.HasKey(StructureConsts.KEYWORD_FOLLOWEDBY, out DataValue followups))
+                    if (followups.value != structureToken.StructType)
+                        return false;
+                return true;
+            });
+        }
+
         private bool CheckToken(DataSet set, Token token, out DataSet potentials)
         {
-            List<DataContainer> container = new List<DataContainer>();
             System.Func<DataContainer, bool> predicate = (x) =>
             {
                 if (x.HasKey(StructureConsts.KEYWORD_TYPE, out DataValue typeValue) && typeValue.value != token.Type)
                     return false;
                 if (x.HasKey(StructureConsts.KEYWORD_VALUE, out DataValue valueValue) && valueValue.value != token.Value)
                     return false;
-
-                container.Add(x);
                 return true;
             };
 

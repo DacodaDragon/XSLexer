@@ -34,6 +34,7 @@ namespace XSLexer.Lexing
             stopwatch.Stop();
             Debug.Log($"[Grammar] Done! {stopwatch.ElapsedMilliseconds}ms elapsed!");
 
+            Debug.Show(set.ToString(), System.ConsoleColor.Cyan);
 
             for (int i = 0; i < stokens.Length; i++)
             {
