@@ -12,9 +12,8 @@ namespace XSLexer
             LexConfig config = new LexConfig(
                 new DataSet[] { DataSetParser.Parse("TokensDefinitions", Resources.TokenDefinitions) },
                 new DataSet[] { DataSetParser.Parse("DataType Words", Resources.DataTypes) });
-            StructureConfig structureConfig = new StructureConfig(DataSetParser.Parse("Structure Configuration", Resources.XsGrammarConfig));
 
-            TokenSet tokenSet = new Lexer(config, structureConfig).Lex(Resources.XsFunction);
+            TokenSet tokenSet = new Lexer(config).Lex(Resources.XsFunction);
 
             Debug.Imp("STATS:");
             Debug.Imp($"Contains {tokenSet.Length} tokens!");
