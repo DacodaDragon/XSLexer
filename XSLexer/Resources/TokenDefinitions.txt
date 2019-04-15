@@ -5,6 +5,8 @@
 # UntilWith	: [String]  # Include everything Until another token is found, Including the found token
 #
 # == Validation ==
+# CharStart : [string]  # All characters the first character is allowed to be
+# CharBody	: [string]	# All characters the characters after the first character are allowed to be.
 # RegStart	: [Regex]	# The regex that needs to be valid on the first character
 # RegBody	: [Regex]   # The regex that needs to be valid on all characters after the first character
 # Word		: [String]  # The regex with the specific word it needs to be to be that token. >> CharStart and CharBody are required.
@@ -14,8 +16,28 @@ Word>
 	CharStart: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 	CharBody: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-Brac>
-	CharStart: {}[]()
+CbOp>
+	CharStart: {
+	Length: 1
+
+CbCl>
+	CharStart: }
+	Length: 1
+
+PaOp>
+	CharStart: (
+	Length: 1
+
+PaCl>
+	CharStart: )
+	Length: 1
+
+SqOp>
+	CharStart: [
+	Length: 1
+
+SqCl>
+	CharStart: ]
 	Length: 1
 
 Oper>

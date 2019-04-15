@@ -2,19 +2,20 @@
 #
 # Current Incoming Tokens:
 # - Word	# Any word that isn't a reserved type
-# - Brac	# Brackets
+# - CbOp	# Curlybracket open {
+# - CbCl	# Curlybracket close }
+# - PaOp	# Parenthese open (
+# - PaCl	# Parenthese close )
+# - SqOp	# SquareBracket open [
+# - SqCl	# SquareBracket close ]
 # - Oper	# Operators
 # - AsOp	# Assignment Operators
 # - Asgn	# Assignment
 # - Comp	# Comparison operatros
-# - Semc	# Semicolon
 # - Cmma	# Comma
 # - Numb	# Number
-# - SCmt	# Single line comment
-# - MCmt	# multi Line Comment
-# - NewL	# New Line
-# - Spac	# Spaces and Tabs (or series of them)
 # - Coln	# Colon
+# - Semc	# Semicolon
 # - Stri	# String
 # - Squo	# Single Quote
 # - DatT	# DataType
@@ -31,21 +32,41 @@ FuncName>
 	FollowedBy: FuncParamOpen
 
 FuncParamOpen>
-	Type: Brac
-	Value: (
+	Type: PaOp
 	FollowedBy: FuncParamEnd
 
 FuncParamEnd>
-	Type: Brac
-	Value: )
+	Type: PaCl
 	FollowedBy: FuncBodyOpen
 
 FuncBodyOpen>
-	Type: Brac
-	Value: {
-	FollowedBy: FuncBodyClose
+	Type: CbOp
+	FollowedBy: FuncBodyClose|VariableDec
 	Until: FuncBodyClose
 
 FuncBodyClose>
-	Type: Brac
-	Value: }
+	Type: CbCl
+
+# Function Declaration
+MutFunc>
+	Root: True
+	Type: KeyW
+	Value: mutable
+	FollowedBy: MutFuncDatT
+
+MutFuncDatT>
+	Type: DatT
+	FollowedBy: FuncName
+
+# Variable
+VariableDec>
+	Root: True
+	Type: DatT
+	FollowedBy: VariableName
+
+VariableName>
+	Type: Word
+	FollowedBy: EndExpression
+
+EndExpression>
+	Type: Semc
