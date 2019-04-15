@@ -19,7 +19,6 @@ namespace XSLexer.Lexing
         private int m_Line = 1;
 
         private string m_SearchFlag = "";
-        private bool m_SearchInclusive = false;
 
         private LexConfig m_Config;
 
@@ -185,7 +184,6 @@ namespace XSLexer.Lexing
                 if (Final[0].HasKey(TokenConsts.KEYWORD_UNTIL))
                 {
                     m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTIL).value;
-                    m_SearchInclusive = false;
                 }
             }
 
@@ -194,7 +192,6 @@ namespace XSLexer.Lexing
                 if (Final[0].HasKey(TokenConsts.KEYWORD_UNTILWITH))
                 {
                     m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTILWITH).value;
-                    m_SearchInclusive = true;
                 }
             }
 

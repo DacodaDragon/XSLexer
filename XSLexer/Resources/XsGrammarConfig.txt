@@ -21,7 +21,18 @@
 # - DatT	# DataType
 # - KeyW	# Keyword
 
-# Function Implementation
+# ============ Function Declaration ============
+MutFunc>
+ 	Root: True
+ 	Type: KeyW
+ 	Value: mutable
+ 	FollowedBy: MutFuncDatT
+ 
+MutFuncDatT>
+ 	Type: DatT
+ 	FollowedBy: FuncName
+ 
+# ============ Function Implementation ============
 FuncImpl>
 	Root: True
 	Type: DatT
@@ -41,24 +52,13 @@ FuncParamEnd>
 
 FuncBodyOpen>
 	Type: CbOp
-	FollowedBy: FuncBodyClose|VariableDec
+	FollowedBy: VariableDec|FuncBodyClose
 	Until: FuncBodyClose
 
 FuncBodyClose>
 	Type: CbCl
 
-# Function Declaration
-MutFunc>
-	Root: True
-	Type: KeyW
-	Value: mutable
-	FollowedBy: MutFuncDatT
-
-MutFuncDatT>
-	Type: DatT
-	FollowedBy: FuncName
-
-# Variable
+# ============ Variable ============
 VariableDec>
 	Root: True
 	Type: DatT
@@ -66,7 +66,7 @@ VariableDec>
 
 VariableName>
 	Type: Word
-	FollowedBy: EndExpression
+	FollowedBy: ExpressionEnd
 
-EndExpression>
-	Type: Semc
+ExpressionEnd>
+	Type> Semc

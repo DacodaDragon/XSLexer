@@ -41,7 +41,7 @@ namespace XSLexer
             Token token = m_TokenSet[m_Index++];
 
             if (!CheckToken(allowedTokens, token, out DataSet potentials))
-                throw new System.Exception("I can't be anything.. T-T");
+                throw new System.Exception("Unknown Token");
 
             if (potentials.Length == 1)
             {
@@ -115,12 +115,12 @@ namespace XSLexer
                 return structureToken;
             }
 
-            throw new System.Exception("Parsed next token and I atill have no idea what I am T-T");
+            throw new System.Exception("Unkown token after parsing next");
         }
 
         private DataSet GetFollowUps(DataSet dataSet)
         {
-            return ResolveFollowUpTypes(GetFollowUpTypes(dataSet));
+            return ResolveReferences(ResolveTypes(GetFollowUpTypes(dataSet)));
         }
 
         private string[] GetFollowUpTypes(DataSet dataSet)
@@ -133,7 +133,7 @@ namespace XSLexer
                     out DataValue FollowedBy))
                     continue;
 
-                string[] FollowUps = FollowedBy.value.Split('|');
+                string[] FollowUps = FollowedBy.value.Split(StructureConsts.CHAR_DIVIDER);
 
                 for (int j = 0; j < FollowUps.Length; j++)
                 {
@@ -145,20 +145,68 @@ namespace XSLexer
             return types.ToArray();
         }
 
-        private DataSet ResolveFollowUpTypes(string[] types)
+        private string[] GetReferenceTypes(DataSet dataSet)
         {
-            return m_Config.StructureSet.Filter((x) =>
+            List<string> types = new List<string>();
+
+            for (int i = 0; i < dataSet.Length; i++)
+            {
+                if (!dataSet[i].HasKey(StructureConsts.KEYWORD_REF,
+                    out DataValue FollowedBy))
+                    continue;
+
+                string[] FollowUps = FollowedBy.value.Split(StructureConsts.CHAR_DIVIDER);
+
+                for (int j = 0; j < FollowUps.Length; j++)
+                {
+                    if (!types.Contains(FollowUps[j]))
+                        types.Add(FollowUps[j]);
+                }
+            };
+
+            return types.ToArray();
+        }
+
+        private DataSet ResolveTypes(string[] types)
+        {
+            DataSet set = m_Config.StructureSet.Filter((x) =>
             {
                 return types.Contains(x.Name);
             });
+            return set;
         }
 
-        private DataSet RequirementsFilter(StructureToken structureToken, DataSet Followups)
+        private DataSet ResolveReferences(DataSet collection)
         {
-            return Followups.Filter((x) => {
+            DataSet refernceTokens = collection.Filter(x =>
+                x.HasKey(StructureConsts.KEYWORD_REF)
+            );
+
+            //tring[] values = reference.value.Split(StructureConsts.CHAR_DEVIDER);
+
+            /// No tokens are reference tokens
+            if (refernceTokens.Length == 0)
+                return collection;
+
+            // Filter away all reference tokens from the old collection
+            DataSet nonReferenceTokens = collection.FilterOut((x) =>
+            {
+                for (int i = 0; i < refernceTokens.Length; i++)
+                    if (refernceTokens[i].Name == collection.Name)
+                        return true;
+                return false;
+            });
+
+            return nonReferenceTokens.Aggregate(ResolveTypes(GetReferenceTypes(refernceTokens)));
+        }
+
+        private DataSet RequirementsFilter(StructureToken nextToken, DataSet potentials)
+        {
+            return potentials.Filter((x) =>
+            {
                 if (x.HasKey(StructureConsts.KEYWORD_FOLLOWEDBY, out DataValue followups))
-                    if (followups.value != structureToken.StructType)
-                        return false;
+                    if (followups.value == nextToken.StructType)
+                        return true;
                 return true;
             });
         }

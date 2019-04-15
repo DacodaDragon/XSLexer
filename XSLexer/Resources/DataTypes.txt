@@ -1,9 +1,9 @@
 # XS word Replacer
 # Format:
 # OldType:
-#	wordvalue : NewType
-#	wordvalue : NewType
-#	wordvalue : NewType
+#	value : NewType
+#	value : NewType
+#	value : NewType
 
 # all dataTypes found in XS
 Word>
