@@ -1,0 +1,16 @@
+IMPLEMENTATIONS>
+	DataFile special list (with predetermined name like "Settings>" or "Flags>" for containing settings that aren't part of the actual ruleset)
+		(e.g. for structurizer an IgnoreType:string[] setting would be nice instead of hardcoding what types there are)
+	DataFile flags (instead of Keyname: True, just have !Keyname or +Keyname)
+	Structurizer Tag "Ref:string[]" for containing a list of other tags it could be.
+		(eg. Expression> Ref: FuncCall|ExprBodyOp|Value)
+	LogicCheck Implementation: 
+		I was thinking about making a Lua interface (Library?)
+		since that stuff gets more complex than just a simple tokenbased
+		ruleset. Lua has some basic familiarity to people already, might be 
+		intresting. Maybe we can support multiple in the future?
+		
+OPTIMIZATION:
+	Preparsed DataValue.value for TokenReplacer
+	Preparsed DataValue.value for Structurizer
+	DataSet.Resolve() use type-hash for lookup instead of strings
