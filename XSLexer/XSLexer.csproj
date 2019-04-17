@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Data\DataContainer.cs" />
     <Compile Include="Data\DataSetParser.cs" />
+    <Compile Include="Rule.cs" />
+    <Compile Include="StructureRulesetParser.cs" />
     <Compile Include="Tokenizer\CustomDatasetBase.cs" />
     <Compile Include="Data\DataSet.cs" />
     <Compile Include="Data\DataValue.cs" />
@@ -115,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\XsGrammarConfig.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ruleset\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,52 +21,31 @@
 # - DatT	# DataType
 # - KeyW	# Keyword
 
-# Function Implementation
-FuncImpl>
-	Root: True
-	Type: DatT
-	FollowedBy: FuncName
+# ==========   Naming   ==========
+# > Non Root
+# = Start Definition
+#
+# ========== For Values ==========
+# : followed by (not escapable char)
+# ! Reference to this list
+# & With value of
+# * Multiple off (list)
+# $ With Value Of
+# \ escape next character
 
-FuncName>
-	Type: Word
-	FollowedBy: FuncParamOpen
 
-FuncParamOpen>
-	Type: PaOp
-	FollowedBy: FuncParamEnd
+# Functions
+Func = DatT : Word : PaOp : !Param : PaCl
+Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
 
-FuncParamEnd>
-	Type: PaCl
-	FollowedBy: FuncBodyOpen
+#>Expr = KeyW&if : PaOp : !Expr : PaCl : !Expr
+#>Expr = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
+>Expr = !Value
 
-FuncBodyOpen>
-	Type: CbOp
-	FollowedBy: FuncBodyClose|VariableDec
-	Until: FuncBodyClose
-
-FuncBodyClose>
-	Type: CbCl
-
-# Function Declaration
-MutFunc>
-	Root: True
-	Type: KeyW
-	Value: mutable
-	FollowedBy: MutFuncDatT
-
-MutFuncDatT>
-	Type: DatT
-	FollowedBy: FuncName
-
-# Variable
-VariableDec>
-	Root: True
-	Type: DatT
-	FollowedBy: VariableName
-
-VariableName>
-	Type: Word
-	FollowedBy: EndExpression
-
-EndExpression>
-	Type: Semc
+#		 int   hey    =      "lol"   ,
+#>Param = DatT: Word : Asng : Value
+#>Param = DatT: Word : Asng : Value : Cmma : !Param
+#
+#> Value = Stri
+#> Value = Numb
+#> Value = Snqo
