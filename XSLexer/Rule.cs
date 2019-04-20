@@ -1,11 +1,13 @@
-﻿namespace XSLexer
+﻿using System.Collections.Generic;
+
+namespace XSLexer
 {
     /// <summary>
     /// Ruleset for structure parsing
     /// </summary>
-    class StructureRule
+    class StructureRuleValue
     {
-        public StructureRule(StructureRule next, string type, string value, string splitByType, bool isReference, bool isMultiple, bool hasValue)
+        public StructureRuleValue(StructureRuleValue next, string type, string value, string splitByType, bool isReference, bool isMultiple, bool hasValue)
         {
             Next = next;
             Type = type;
@@ -16,7 +18,7 @@
             HasValue = hasValue;
         }
 
-        public StructureRule Next { get; }
+        public StructureRuleValue Next { get; }
         public string Type { get; }
         public string Value { get; }
         public string SplitByType { get; }
@@ -29,13 +31,14 @@
     /// <summary>
     /// Editable version of StructureRule used through parsing
     /// </summary>
-    class PartialStructureRule
+    class PartialStructureRuleValue
     {
-        public PartialStructureRule()
+        public PartialStructureRuleValue()
         {
+
         }
 
-        public StructureRule Next { get; set; }
+        public PartialStructureRuleValue Next { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
         public string SplitByType { get; set; }
@@ -44,10 +47,10 @@
         public bool IsMultiple { get; set; }
         public bool HasValue { get; set; }
 
-        public StructureRule Finalize()
+        public StructureRuleValue Finalize()
         {
-            return new StructureRule(
-                Next,
+            return new StructureRuleValue(
+                Next?.Finalize(),
                 Type,
                 Value,
                 SplitByType,
@@ -55,6 +58,57 @@
                 IsMultiple,
                 HasValue
             );
+        }
+
+        public override string ToString()
+        {
+            string s = Type;
+            if (Next != null)
+                s += ' ' + Next.ToString();
+            return s;
+        }
+    }
+
+    class PartialBaseStructureRule
+    {
+        public PartialBaseStructureRule()
+        {
+        }
+
+        public int Line { get; set; }
+        public bool IsRoot { get; set; }
+        public string Name { get; set; }
+        public PartialStructureRuleValue StructureRuleValue { get; set; }
+
+        public override string ToString()
+        {
+            string str = Name;
+            if (StructureRuleValue != null)
+                str += ": " + StructureRuleValue.ToString();
+            return str;
+        }
+    }
+
+    class PartialGrammarRuleset
+    {
+        List<PartialBaseStructureRule> RootRules = new List<PartialBaseStructureRule>();
+        List<PartialBaseStructureRule> AllRules = new List<PartialBaseStructureRule>();
+
+        public void Add(PartialBaseStructureRule Rule)
+        {
+            AllRules.Add(Rule);
+            if (Rule.IsRoot)
+                RootRules.Add(Rule);
+        }
+
+        public override string ToString()
+        {
+            string str = "PartialGrammarRuleset:\n";
+            for (int i = 0; i < AllRules.Count; i++)
+            {
+                str +=  AllRules[i].ToString() + '\n';
+            }
+            return str;
         }
     }
 }

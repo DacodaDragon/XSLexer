@@ -6,7 +6,7 @@ namespace XSLexer
     {
         static void Main(string[] args)
         {
-            StructureRulesetParser.Parse(Resources.XsGrammarConfig);
+            Debug.Log(GrammarRulesetParser.Parse(Resources.XsGrammarConfig));
             Debug.Pause();
         }
     }

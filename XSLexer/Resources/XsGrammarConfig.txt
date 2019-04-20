@@ -22,7 +22,7 @@
 # - KeyW	# Keyword
 
 # ==========   Naming   ==========
-# > Non Root
+# > Root
 # = Start Definition
 #
 # ========== For Values ==========
@@ -30,22 +30,18 @@
 # ! Reference to this list
 # & With value of
 # * Multiple off (list)
-# $ With Value Of
-# \ escape next character
-
 
 # Functions
-Func = DatT : Word : PaOp : !Param : PaCl
-Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
+> Func = DatT : Word : PaOp : !Param : PaCl
+> Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
 
-#>Expr = KeyW&if : PaOp : !Expr : PaCl : !Expr
-#>Expr = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
->Expr = !Value
+#>Statement = KeyW&if : PaOp : !Expr : PaCl : !Expr
+#>Statement = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
+#>Expr = !Value
 
 #		 int   hey    =      "lol"   ,
-#>Param = DatT: Word : Asng : Value
-#>Param = DatT: Word : Asng : Value : Cmma : !Param
-#
-#> Value = Stri
-#> Value = Numb
-#> Value = Snqo
+>Param = DatT: Word : Asng : !Value
+>Param = DatT: Word : Asng : !Value : Cmma : !Param
+Value = Stri
+Value = Numb
+Value = Snqo
