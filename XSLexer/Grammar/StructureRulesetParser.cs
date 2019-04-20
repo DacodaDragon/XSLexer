@@ -2,6 +2,7 @@
 
 namespace XSLexer
 {
+
     /// <summary>
     /// Parses StructureRule tree
     /// </summary>
