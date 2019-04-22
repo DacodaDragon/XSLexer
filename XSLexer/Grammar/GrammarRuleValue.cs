@@ -17,6 +17,7 @@
         }
 
         public GrammarRuleValue Next { get; }
+        public GrammarRule[] References { get; private set; }
         public string Type { get; }
         public string Value { get; }
         public string SplitByType { get; }
@@ -27,10 +28,22 @@
 
         public override string ToString()
         {
-            string s = Type;
+            string s = "";
+
+
+            s += Type;
+
+            if (IsReference)
+                s += $"(!{References.Length})";
+
             if (Next != null)
                 s += ' ' + Next.ToString();
             return s;
+        }
+
+        public void SetReferences(GrammarRule[] References)
+        {
+            this.References = References;
         }
     }
 }

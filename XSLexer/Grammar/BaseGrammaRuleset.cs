@@ -1,8 +1,8 @@
 ﻿namespace XSLexer
 {
-    class BaseGrammarRule
+    class GrammarRule
     {
-        public BaseGrammarRule(
+        public GrammarRule(
             int line,
             bool isRoot,
             string name,

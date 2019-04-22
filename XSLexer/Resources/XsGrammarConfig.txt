@@ -31,17 +31,13 @@
 # & With value of
 # * Multiple off (list)
 
-# Functions
 > Func = DatT : Word : PaOp : !Param : PaCl
 > Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
-
-#>Statement = KeyW&if : PaOp : !Expr : PaCl : !Expr
-#>Statement = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
-#>Expr = !Value
-
-#		 int   hey    =      "lol"   ,
->Param = DatT: Word : Asng : !Value
->Param = DatT: Word : Asng : !Value : Cmma : !Param
+Statement = KeyW&if : PaOp : !Expr : PaCl : !Expr
+Statement = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
+Expr = !Value
+Param = DatT: Word : Asng : !Value
+Param = DatT: Word : Asng : !Value : Cmma : !Param
 Value = Stri
 Value = Numb
 Value = Snqo

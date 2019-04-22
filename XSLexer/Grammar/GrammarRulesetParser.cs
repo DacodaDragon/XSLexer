@@ -8,6 +8,7 @@ namespace XSLexer
     static class GrammarRulesetParser
     {
         private static int m_Line = 0;
+        private static char[] TRIM = { ' ', '\r', '\n', '\t' };
 
         public static GrammarRuleset Parse(string code)
         {
@@ -33,11 +34,11 @@ namespace XSLexer
             if (Struct[0][0] == '>')
             {
                 baseRule.IsRoot = true;
-                baseRule.Name = Struct[0].Remove(0, 1).Trim(' ', '\t');
+                baseRule.Name = Struct[0].Remove(0, 1).Trim(TRIM);
             }
             else
             {
-                baseRule.Name = Struct[0].Trim(' ', '\t');
+                baseRule.Name = Struct[0].Trim(TRIM);
             }
 
             baseRule.GrammarRuleValue = ParseValues(Struct[1]);
@@ -58,12 +59,12 @@ namespace XSLexer
             PartialGrammarRuleValue root;
             PartialGrammarRuleValue newest;
 
-            newest = ParseValue(values[0].Trim(' ', '\t'));
+            newest = ParseValue(values[0].Trim(TRIM));
             root = newest;
 
             for (int i = 1; i < values.Length; i++)
             {
-                newest.Next = ParseValue(values[i].Trim(' ', '\t'));
+                newest.Next = ParseValue(values[i].Trim(TRIM));
                 newest = newest.Next;
             }
             return root;

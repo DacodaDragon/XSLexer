@@ -15,9 +15,9 @@
             return str;
         }
 
-        public BaseGrammarRule Finalize()
+        public GrammarRule Finalize()
         {
-            return new BaseGrammarRule(
+            return new GrammarRule(
                 Line,
                 IsRoot,
                 Name,

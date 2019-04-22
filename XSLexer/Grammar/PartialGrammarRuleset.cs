@@ -23,8 +23,8 @@ namespace XSLexer
 
         public GrammarRuleset Finalize()
         {
-            BaseGrammarRule[] rules = new BaseGrammarRule[m_AllRules.Count];
-            List<BaseGrammarRule> roots = new List<BaseGrammarRule>();
+            GrammarRule[] rules = new GrammarRule[m_AllRules.Count];
+            List<GrammarRule> roots = new List<GrammarRule>();
             for (int i = 0; i < m_AllRules.Count; i++)
             {
                 rules[i] = m_AllRules[i].Finalize();
