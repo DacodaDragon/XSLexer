@@ -3,9 +3,9 @@
     /// <summary>
     /// Ruleset for structure parsing
     /// </summary>
-    class StructureRuleValue
+    class GrammarRuleValue
     {
-        public StructureRuleValue(StructureRuleValue next, string type, string value, string splitByType, bool isReference, bool isMultiple, bool hasValue)
+        public GrammarRuleValue(GrammarRuleValue next, string type, string value, string splitByType, bool isReference, bool isMultiple, bool hasValue)
         {
             Next = next;
             Type = type;
@@ -16,7 +16,7 @@
             HasValue = hasValue;
         }
 
-        public StructureRuleValue Next { get; }
+        public GrammarRuleValue Next { get; }
         public string Type { get; }
         public string Value { get; }
         public string SplitByType { get; }

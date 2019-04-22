@@ -2,7 +2,6 @@
 
 namespace XSLexer
 {
-
     /// <summary>
     /// Parses StructureRule tree
     /// </summary>
@@ -25,10 +24,10 @@ namespace XSLexer
         }
 
         // *************************** RULE PARSING *************************** 
-        private static PartialBaseStructureRule ParseRule(string line)
+        private static PartialBaseGrammarRule ParseRule(string line)
         {
             string[] Struct = line.Split('=');
-            PartialBaseStructureRule baseRule = new PartialBaseStructureRule();
+            PartialBaseGrammarRule baseRule = new PartialBaseGrammarRule();
 
             if (Struct[0][0] == '>')
             {
@@ -40,7 +39,7 @@ namespace XSLexer
                 baseRule.Name = Struct[0].Trim(' ', '\t');
             }
 
-            baseRule.StructureRuleValue = ParseValues(Struct[1]);
+            baseRule.GrammarRuleValue = ParseValues(Struct[1]);
             baseRule.Line = m_Line;
             return baseRule;
         }
@@ -48,15 +47,15 @@ namespace XSLexer
 
 
         // *************************** VALUE PARSING *************************** 
-        private static PartialStructureRuleValue ParseValues(string line)
+        private static PartialGrammarRuleValue ParseValues(string line)
         {
             return ParseValues(line.Split(':'));
         }
 
-        private static PartialStructureRuleValue ParseValues(string[] values)
+        private static PartialGrammarRuleValue ParseValues(string[] values)
         {
-            PartialStructureRuleValue root;
-            PartialStructureRuleValue newest;
+            PartialGrammarRuleValue root;
+            PartialGrammarRuleValue newest;
 
             newest = ParseValue(values[0].Trim(' ', '\t'));
             root = newest;
@@ -69,12 +68,12 @@ namespace XSLexer
             return root;
         }
 
-        private static PartialStructureRuleValue ParseValue(string value)
+        private static PartialGrammarRuleValue ParseValue(string value)
         {
-            return ParseValue(new PartialStructureRuleValue(), value);
+            return ParseValue(new PartialGrammarRuleValue(), value);
         }
 
-        private static PartialStructureRuleValue ParseValue(PartialStructureRuleValue rule, string value)
+        private static PartialGrammarRuleValue ParseValue(PartialGrammarRuleValue rule, string value)
         {
             if (value[0] == '*')
             {

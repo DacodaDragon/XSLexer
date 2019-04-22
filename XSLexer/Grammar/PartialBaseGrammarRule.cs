@@ -1,8 +1,8 @@
 ﻿namespace XSLexer
 {
-    class PartialBaseStructureRule
+    class PartialBaseGrammarRule
     {
-        public PartialBaseStructureRule()
+        public PartialBaseGrammarRule()
         {
 
         }
@@ -10,13 +10,13 @@
         public int Line { get; set; }
         public bool IsRoot { get; set; }
         public string Name { get; set; }
-        public PartialStructureRuleValue StructureRuleValue { get; set; }
+        public PartialGrammarRuleValue GrammarRuleValue { get; set; }
 
         public override string ToString()
         {
             string str = Name;
-            if (StructureRuleValue != null)
-                str += ": " + StructureRuleValue.ToString();
+            if (GrammarRuleValue != null)
+                str += ": " + GrammarRuleValue.ToString();
             return str;
         }
     }

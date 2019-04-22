@@ -4,22 +4,21 @@ namespace XSLexer
 {
     class PartialGrammarRuleset
     {
-        List<PartialBaseStructureRule> RootRules = new List<PartialBaseStructureRule>();
-        List<PartialBaseStructureRule> AllRules = new List<PartialBaseStructureRule>();
+        List<PartialBaseGrammarRule> m_AllRules = new List<PartialBaseGrammarRule>();
 
-        public void Add(PartialBaseStructureRule Rule)
+        PartialBaseGrammarRule[] GetAllRules => m_AllRules.ToArray();
+
+        public void Add(PartialBaseGrammarRule Rule)
         {
-            AllRules.Add(Rule);
-            if (Rule.IsRoot)
-                RootRules.Add(Rule);
+            m_AllRules.Add(Rule);
         }
 
         public override string ToString()
         {
             string str = "PartialGrammarRuleset:\n";
-            for (int i = 0; i < AllRules.Count; i++)
+            for (int i = 0; i < m_AllRules.Count; i++)
             {
-                str +=  AllRules[i].ToString() + '\n';
+                str +=  m_AllRules[i].ToString() + '\n';
             }
             return str;
         }

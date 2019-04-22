@@ -3,14 +3,14 @@
     /// <summary>
     /// Editable version of StructureRule used through parsing
     /// </summary>
-    class PartialStructureRuleValue
+    class PartialGrammarRuleValue
     {
-        public PartialStructureRuleValue()
+        public PartialGrammarRuleValue()
         {
 
         }
 
-        public PartialStructureRuleValue Next { get; set; }
+        public PartialGrammarRuleValue Next { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
         public string SplitByType { get; set; }
@@ -19,9 +19,9 @@
         public bool IsMultiple { get; set; }
         public bool HasValue { get; set; }
 
-        public StructureRuleValue Finalize()
+        public GrammarRuleValue Finalize()
         {
-            return new StructureRuleValue(
+            return new GrammarRuleValue(
                 Next?.Finalize(),
                 Type,
                 Value,
