@@ -2,11 +2,6 @@
 {
     class PartialBaseGrammarRule
     {
-        public PartialBaseGrammarRule()
-        {
-
-        }
-
         public int Line { get; set; }
         public bool IsRoot { get; set; }
         public string Name { get; set; }
@@ -18,6 +13,15 @@
             if (GrammarRuleValue != null)
                 str += ": " + GrammarRuleValue.ToString();
             return str;
+        }
+
+        public BaseGrammarRule Finalize()
+        {
+            return new BaseGrammarRule(
+                Line,
+                IsRoot,
+                Name,
+                GrammarRuleValue.Finalize());
         }
     }
 }

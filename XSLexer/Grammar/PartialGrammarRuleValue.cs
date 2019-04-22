@@ -15,18 +15,20 @@
         public string Value { get; set; }
         public string SplitByType { get; set; }
         public bool IsRoot { get; set; }
-        public bool IsReference { get; set; }
+        public bool IsReferenceType { get; set; }
         public bool IsMultiple { get; set; }
         public bool HasValue { get; set; }
 
         public GrammarRuleValue Finalize()
         {
+            GrammarRuleValue next = Next != null ? Next.Finalize() : null;
+
             return new GrammarRuleValue(
-                Next?.Finalize(),
+                next,
                 Type,
                 Value,
                 SplitByType,
-                IsReference,
+                IsReferenceType,
                 IsMultiple,
                 HasValue
             );

@@ -24,5 +24,13 @@
         public bool IsReference { get; }
         public bool IsMultiple { get; }
         public bool HasValue { get; }
+
+        public override string ToString()
+        {
+            string s = Type;
+            if (Next != null)
+                s += ' ' + Next.ToString();
+            return s;
+        }
     }
 }

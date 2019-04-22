@@ -9,8 +9,9 @@ namespace XSLexer
     {
         private static int m_Line = 0;
 
-        public static PartialGrammarRuleset Parse(string code)
+        public static GrammarRuleset Parse(string code)
         {
+            m_Line = 0;
             string[] lines = code.Split('\n');
             PartialGrammarRuleset partialGrammarConfiguration = new PartialGrammarRuleset();
             for (int i = 0; i < lines.Length; i++)
@@ -20,7 +21,7 @@ namespace XSLexer
                     continue;
                 partialGrammarConfiguration.Add(ParseRule(lines[i]));
             }
-            return partialGrammarConfiguration;
+            return new GrammarRuleSetFinalizer().Finalize(partialGrammarConfiguration);
         }
 
         // *************************** RULE PARSING *************************** 
@@ -83,7 +84,7 @@ namespace XSLexer
 
             if (value[0] == '!')
             {
-                rule.IsReference = true;
+                rule.IsReferenceType = true;
                 return ParseValue(rule, value.Remove(0, 1));
             }
 

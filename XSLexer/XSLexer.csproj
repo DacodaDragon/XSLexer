@@ -60,6 +60,9 @@
   <ItemGroup>
     <Compile Include="Data\DataContainer.cs" />
     <Compile Include="Data\DataSetParser.cs" />
+    <Compile Include="Grammar\BaseGrammaRuleset.cs" />
+    <Compile Include="Grammar\GrammarRuleset.cs" />
+    <Compile Include="Grammar\GrammarRuleSetFinalizer.cs" />
     <Compile Include="Grammar\GrammarRulesetParser.cs" />
     <Compile Include="Grammar\GrammarRuleValue.cs" />
     <Compile Include="Grammar\PartialBaseGrammarRule.cs" />
