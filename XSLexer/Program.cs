@@ -1,4 +1,5 @@
 ﻿using XSLexer.Properties;
+using XSLexer.Grammar;
 
 namespace XSLexer
 {
@@ -6,7 +7,8 @@ namespace XSLexer
     {
         static void Main(string[] args)
         {
-            Debug.Log(GrammarRulesetParser.Parse(Resources.XsGrammarConfig));
+            GrammarRuleset ruleset = GrammarRulesetParser.Parse(Resources.XsGrammarConfig);
+            Rebug.Barf(ruleset);
             Debug.Pause();
         }
     }

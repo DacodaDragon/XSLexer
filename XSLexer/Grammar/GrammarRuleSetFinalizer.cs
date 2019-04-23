@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XSLexer
+namespace XSLexer.Grammar
 {
     class GrammarRuleSetFinalizer
     {

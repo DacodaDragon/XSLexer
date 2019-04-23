@@ -1,4 +1,4 @@
-﻿namespace XSLexer
+﻿namespace XSLexer.Grammar
 {
     class GrammarRule
     {

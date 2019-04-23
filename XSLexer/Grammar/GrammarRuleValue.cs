@@ -1,4 +1,4 @@
-﻿namespace XSLexer
+﻿namespace XSLexer.Grammar
 {
     /// <summary>
     /// Ruleset for structure parsing

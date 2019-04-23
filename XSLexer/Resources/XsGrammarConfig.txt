@@ -31,6 +31,10 @@
 # & With value of
 # * Multiple off (list)
 
+
+>Func = DatT : Word : PaOP: PaCl
+
+
 > Func = DatT : Word : PaOp : !Param : PaCl
 > Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
 Statement = KeyW&if : PaOp : !Expr : PaCl : !Expr

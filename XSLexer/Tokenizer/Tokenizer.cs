@@ -5,7 +5,8 @@ using System;
 
 namespace XSLexer.Lexing
 {
-    // This should probably be state machined somehow if we want more
+    // If this gets any bigger we should split this up in a state machine like way
+    // might get things more organized. 
     class Tokenizer
     {
         private DataSet m_Previous = new DataSet("previous");
@@ -19,7 +20,6 @@ namespace XSLexer.Lexing
         private int m_Line = 1;
 
         private string m_SearchFlag = "";
-        private bool m_SearchInclusive = false;
 
         private LexConfig m_Config;
 
@@ -181,22 +181,12 @@ namespace XSLexer.Lexing
             Token token = new Token(Final[0].Name, m_Buffer.ToString(), m_Line);
 
             if (string.IsNullOrEmpty(m_SearchFlag))
-            {
                 if (Final[0].HasKey(TokenConsts.KEYWORD_UNTIL))
-                {
                     m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTIL).value;
-                    m_SearchInclusive = false;
-                }
-            }
 
             if (string.IsNullOrEmpty(m_SearchFlag))
-            {
                 if (Final[0].HasKey(TokenConsts.KEYWORD_UNTILWITH))
-                {
                     m_SearchFlag = Final[0].GetValue(TokenConsts.KEYWORD_UNTILWITH).value;
-                    m_SearchInclusive = true;
-                }
-            }
 
             // Clear buffering
             ClearBuffers();

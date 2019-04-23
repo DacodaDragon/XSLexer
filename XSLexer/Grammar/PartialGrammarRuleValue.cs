@@ -1,4 +1,4 @@
-﻿namespace XSLexer
+﻿namespace XSLexer.Grammar
 {
     /// <summary>
     /// Editable version of StructureRule used through parsing
