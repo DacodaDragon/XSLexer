@@ -60,12 +60,18 @@ namespace XSLexer
         public static void UnicornWord(object msg) => UnicornWord(msg.ToString());
         public static void UnicornWord(string msg)
         {
+            msg += '\n';
+            System.Text.StringBuilder b = new System.Text.StringBuilder(32);
             for (int i = 0; i < msg.Length; i++)
             {
                 if (msg[i] == '\n' || msg[i] == ' ')
+                {
                     m_RainbowIndex = (m_RainbowIndex + 1) % m_RainbowArray.Length;
-                Console.ForegroundColor = m_RainbowArray[m_RainbowIndex];
-                Console.Write(msg[i]);
+                    Console.ForegroundColor = m_RainbowArray[m_RainbowIndex];
+                    Console.Write(b.ToString());
+                    b.Clear();
+                }
+                b.Append(msg[i]);
             }
         }
 

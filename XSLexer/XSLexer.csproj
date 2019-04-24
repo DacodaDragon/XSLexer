@@ -60,14 +60,14 @@
   <ItemGroup>
     <Compile Include="Data\DataContainer.cs" />
     <Compile Include="Data\DataSetParser.cs" />
-    <Compile Include="Grammar\BaseGrammaRuleset.cs" />
-    <Compile Include="Grammar\GrammarRuleset.cs" />
-    <Compile Include="Grammar\GrammarRuleSetFinalizer.cs" />
-    <Compile Include="Grammar\GrammarRulesetParser.cs" />
-    <Compile Include="Grammar\GrammarRuleValue.cs" />
-    <Compile Include="Grammar\PartialBaseGrammarRule.cs" />
-    <Compile Include="Grammar\PartialGrammarRuleset.cs" />
-    <Compile Include="Grammar\PartialGrammarRuleValue.cs" />
+    <Compile Include="GrammarRuleset\BaseGrammaRuleset.cs" />
+    <Compile Include="GrammarRuleset\GrammarRuleset.cs" />
+    <Compile Include="GrammarRuleset\GrammarRuleSetFinalizer.cs" />
+    <Compile Include="GrammarRuleset\GrammarRulesetParser.cs" />
+    <Compile Include="GrammarRuleset\GrammarRuleValue.cs" />
+    <Compile Include="GrammarRuleset\PartialBaseGrammarRule.cs" />
+    <Compile Include="GrammarRuleset\PartialGrammarRuleset.cs" />
+    <Compile Include="GrammarRuleset\PartialGrammarRuleValue.cs" />
     <Compile Include="Tokenizer\CustomDatasetBase.cs" />
     <Compile Include="Data\DataSet.cs" />
     <Compile Include="Data\DataValue.cs" />
