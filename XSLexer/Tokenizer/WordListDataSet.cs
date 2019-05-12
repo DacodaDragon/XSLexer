@@ -9,7 +9,7 @@ namespace XSLexer.Lexing
 
         public DataContainer[] All => m_Lists;
 
-        public WordListDataSet(DataSet[] dataSets) : base(dataSets)
+        public WordListDataSet(params DataSet[] dataSets) : base(dataSets)
         {
             m_Lists = FindAllLists();
         }

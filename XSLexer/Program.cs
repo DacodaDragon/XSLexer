@@ -1,5 +1,7 @@
 ﻿using XSLexer.Properties;
 using XSLexer.Grammar;
+using XSLexer.Lexing;
+using XSLexer.Data;
 
 namespace XSLexer
 {
@@ -7,7 +9,19 @@ namespace XSLexer
     {
         static void Main(string[] args)
         {
-            GrammarRuleset ruleset = GrammarRulesetParser.Parse(Resources.XsGrammarConfig);
+            DataSet KeywordWordDefinitions = DataSetParser.Parse("WordDefinitions", Resources.DataTypes);
+            DataSet TokenDefinitions = DataSetParser.Parse("TokenDefinitions", Resources.TokenDefinitions);
+            LexConfig lexConfig = new LexConfig(TokenDefinitions, KeywordWordDefinitions);
+
+            GrammarRuleset GrammarRuleset = GrammarRulesetParser.Parse(Resources.XsGrammarConfig);
+
+            string code = Resources.XsFunction; 
+
+            Lexer lexer = new Lexer(lexConfig);
+            GrammarParser grammarParser = new GrammarParser(GrammarRuleset);
+
+            grammarParser.Parse(lexer.Lex(code));
+
             Debug.Pause();
         }
     }

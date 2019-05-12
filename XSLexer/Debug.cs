@@ -55,6 +55,7 @@ namespace XSLexer
                 Console.ForegroundColor = m_RainbowArray[m_RainbowIndex];
                 Console.Write(msg[i]);
             }
+            Console.Write('\n');
         }
 
         public static void UnicornWord(object msg) => UnicornWord(msg.ToString());

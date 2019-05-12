@@ -68,6 +68,7 @@
     <Compile Include="Grammar\Config\PartialBaseGrammarRule.cs" />
     <Compile Include="Grammar\Config\PartialGrammarRuleset.cs" />
     <Compile Include="Grammar\Config\PartialGrammarRuleValue.cs" />
+    <Compile Include="Grammar\GrammarParser.cs" />
     <Compile Include="Tokenizer\CustomDatasetBase.cs" />
     <Compile Include="Data\DataSet.cs" />
     <Compile Include="Data\DataValue.cs" />

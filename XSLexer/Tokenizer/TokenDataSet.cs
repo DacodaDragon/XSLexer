@@ -36,7 +36,7 @@ namespace XSLexer.Lexing
             return new DataSet("all", tokens.ToArray());
         }
 
-        public TokenDataSet(DataSet[] dataSets) : base(dataSets)
+        public TokenDataSet(params DataSet[] dataSets) : base(dataSets)
         {
             All = FindAllTokens();
             Root = Filter(x => !x.IsEmpty && x.HasKey(TokenConsts.KEYWORD_ROOT) && x.GetValue(TokenConsts.KEYWORD_ROOT).value == TokenConsts.BOOL_TRUE);

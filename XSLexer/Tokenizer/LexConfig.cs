@@ -12,5 +12,11 @@ namespace XSLexer.Lexing
             Tokens = new TokenDataSet(tokenDataSets);
             this.WordDefinitions = new WordListDataSet(WordDefinitions);
         }
+
+        public LexConfig(DataSet tokenDataSets, DataSet WordDefinitions)
+        {
+            Tokens = new TokenDataSet(tokenDataSets);
+            this.WordDefinitions = new WordListDataSet(WordDefinitions);
+        }
     }
 }

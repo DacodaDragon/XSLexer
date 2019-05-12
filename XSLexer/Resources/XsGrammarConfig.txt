@@ -1,6 +1,9 @@
 # XS Grammar rules
 #
-# Current Incoming Tokens:
+# ================================
+# ==========   Tokens   ==========
+# ================================
+#
 # - Word	# Any word that isn't a reserved type
 # - CbOp	# Curlybracket open {
 # - CbCl	# Curlybracket close }
@@ -20,28 +23,33 @@
 # - Squo	# Single Quote
 # - DatT	# DataType
 # - KeyW	# Keyword
-
+#
+# ================================
 # ==========   Naming   ==========
+# ================================
+#
 # > Root
 # = Start Definition
 #
+# ================================
 # ========== For Values ==========
+# ================================
+#
 # : followed by (not escapable char)
 # ! Reference to this list
 # & With value of
-# * Multiple off (list)
+# * Multiple of (list)
 
-
->Func = DatT : Word : PaOP: PaCl
-
-
-> Func = DatT : Word : PaOp : !Param : PaCl
-> Func = KeyW&mutable : DatT : Word : PaOp : !Param : PaCl
-Statement = KeyW&if : PaOp : !Expr : PaCl : !Expr
-Statement = KeyW&if : PaOP : !Expr : PaCl : CbOp : !*Expr : CbCl
-Expr = !Value
-Param = DatT: Word : Asng : !Value
-Param = DatT: Word : Asng : !Value : Cmma : !Param
+# Value definitions
 Value = Stri
+Value = Squo
 Value = Numb
-Value = Snqo
+
+# Variable Part Definitions
+VarType = DatT
+VarName = Word
+VarAsign = Asgn
+VarValue = !Value
+VarEnd = Semc
+
+> SimpleAssignment = !VarType : !VarName : !VarAsng : !VarValue : !VarEnd
